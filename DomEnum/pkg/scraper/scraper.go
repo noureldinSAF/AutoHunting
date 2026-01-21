@@ -1,7 +1,7 @@
 package scraper
 
 import (
-	"github.com/noureldinSAF/AutoHunting/internal/config"
+	"github.com/noureldinSAF/AutoHunting/DomEnum/internal/config"
 	"crypto/tls"
 	"net/http"
 	"time"

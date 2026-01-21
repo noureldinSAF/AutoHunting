@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/noureldinSAF/AutoHunting/internal/runner"
+	"github.com/noureldinSAF/AutoHunting/DomEnum/internal/runner"
 	"flag"
 	"github.com/cyinnove/logify"
 )

@@ -1,9 +1,9 @@
 package runner
 
 import (
-	"github.com/noureldinSAF/AutoHunting/pkg/scraper"
-	"github.com/noureldinSAF/AutoHunting/pkg/scraper/sources"
-	"github.com/noureldinSAF/AutoHunting/pkg/utils"
+	"github.com/noureldinSAF/AutoHunting/DomEnum/pkg/scraper"
+	"github.com/noureldinSAF/AutoHunting/DomEnum/pkg/scraper/sources"
+	"github.com/noureldinSAF/AutoHunting/DomEnum/pkg/utils"
 
 	"github.com/cyinnove/logify"
 )

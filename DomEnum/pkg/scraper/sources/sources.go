@@ -1,10 +1,10 @@
 package sources
 
 import (
-	"github.com/noureldinSAF/AutoHunting/pkg/scraper"
-	"github.com/noureldinSAF/AutoHunting/pkg/scraper/sources/crtsh"
-	"github.com/noureldinSAF/AutoHunting/pkg/scraper/sources/whoisfreaks"
-	"github.com/noureldinSAF/AutoHunting/pkg/scraper/sources/whoisxmlapi"
+	"github.com/noureldinSAF/AutoHunting/DomEnum/pkg/scraper"
+	"github.com/noureldinSAF/AutoHunting/DomEnum/pkg/scraper/sources/crtsh"
+	"github.com/noureldinSAF/AutoHunting/DomEnum/pkg/scraper/sources/whoisfreaks"
+	"github.com/noureldinSAF/AutoHunting/DomEnum/pkg/scraper/sources/whoisxmlapi"
 )
 
 var AllSources = [...]scraper.Source{
@@ -20,7 +20,7 @@ func GetAllSources(apiKeys map[string][]string) []scraper.Source {
 	for _, source := range AllSources {
 		sourceName := source.Name()
 
-		if source.RequireAPIKey(){
+		if source.RequireAPIKey() {
 			if keys, ok := apiKeys[sourceName]; ok && len(keys) > 0 {
 				switch sourceName {
 				case "whoisxmlapi":
@@ -28,12 +28,12 @@ func GetAllSources(apiKeys map[string][]string) []scraper.Source {
 				case "whoisfreaks":
 					sources = append(sources, whoisfreaks.New(keys))
 				}
-			
+
 			}
 		} else {
 			sources = append(sources, source)
 		}
-		}
+	}
 
-		return sources
+	return sources
 }
