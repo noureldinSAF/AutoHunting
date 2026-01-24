@@ -24,4 +24,5 @@ go to this folder:  DomEnum/cmd/DomEnum
 ```go go run . -h ```
 passive enumeration ```go go run . -q Swisscom -o swisscomDomains.txt```
 passive and active enumeration ```go go run . -q Swisscom -o swisscomDomains.txt -active```
+add timeout ( important ) ```go go run . -q Swisscom -o swisscomDomains.txt -active -t 60```
 
