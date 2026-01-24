@@ -89,7 +89,7 @@ func (s *Source) Search(query string, client *http.Client) ([]string, error) {
 			domains = append(domains, domain.DomainName)
 		}
 
-		if ro.CurrentPage >= 5 {
+		if ro.CurrentPage >= 1 {
 			break
 		}
 		page++

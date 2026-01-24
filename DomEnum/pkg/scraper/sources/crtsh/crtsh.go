@@ -48,7 +48,7 @@ func (s *Source) Search(query string, client *http.Client) ([]string, error) {
 
 	// 3. Normalize and collect ALL results
 	for _, cn := range r {
-		cn.CommonName = normalizeDomain(cn.CommonName)
+		cn.CommonName = normalizeDomainForCrtsh(cn.CommonName)
 		if cn.CommonName != "" {
 			results = append(results, cn.CommonName) // Keep adding to the list
 		}
@@ -62,7 +62,7 @@ func (s *Source) RequireAPIKey() bool {
 	return false
 }
 
-func normalizeDomain(domain string) string {
+func normalizeDomainForCrtsh(domain string) string {
 	domain = strings.TrimSpace(domain)
 	domain = strings.Trim(domain, "*.")
 

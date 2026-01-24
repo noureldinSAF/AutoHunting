@@ -43,6 +43,22 @@ func WriteOutputToFile(file string, data []string) error {
 	return writer.Flush()
 }
 
+func NormalizeDomain(d string) (string, bool) {
+	d = strings.TrimSpace(strings.ToLower(d))
+
+	// remove trailing dot (FQDN form)
+	d = strings.TrimSuffix(d, ".")
+
+	// reject empty/root/obviously broken values
+	if d == "" || d == "." || d == "-" {
+		return "", false
+	}
+	if strings.Contains(d, "..") || strings.HasPrefix(d, ".") || strings.HasSuffix(d, ".") {
+		return "", false
+	}
+	return d, true
+}
+
 
 
 

@@ -9,4 +9,5 @@ type Options struct {
 	Timeout     int
 	Silent      bool
 	Verbose     bool
+	ActiveEnabled      bool
 }

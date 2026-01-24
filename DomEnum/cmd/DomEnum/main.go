@@ -15,6 +15,7 @@ func main() {
 	flag.IntVar(&options.Concurrency, "c", 5, "Concurrency level for enumeration")
 	flag.StringVar(&options.InputFile, "i", "", "input file")
 	flag.StringVar(&options.OutputFile, "o", "", "output file")
+	flag.BoolVar(&options.ActiveEnabled, "active", false, "Active Enumeration" )
 
 	flag.Parse()
 
