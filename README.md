@@ -69,6 +69,10 @@ usage example
 ```bash
 go run . -active -c 10 -i domains.txt -o subs.txt
 ```
+mutation is time consuming, so it is important to limit it 
+```bash
+go run . -active -c 20 -i domains.txt -o subs.txt -e -max-mutations-size 50
+```
 
 
 
