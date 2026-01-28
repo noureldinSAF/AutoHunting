@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"time"
 
 	"github.com/cyinnove/logify"
 
@@ -11,6 +12,7 @@ import (
 var options = &runner.Options{}
 
 func main() {
+	start := time.Now()
 	// Main entry point for the application
 	flag.StringVar(&options.Query, "d", "", "domain to enumerate it's domains (acquisitions) sperated by comma")
 	flag.IntVar(&options.Timeout, "timeout", 60, "timeout for enumeration (seconds)")
@@ -30,5 +32,8 @@ func main() {
 	if err := runner.Run(options); err != nil {
 		logify.Errorf("Error running the tool %v", err)
 	}
+ 
+	elapsed := time.Since(start)
+	logify.Infof("Finished in %s", elapsed.Round(time.Millisecond))
 
 }

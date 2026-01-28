@@ -1,0 +1,7 @@
+config: 
+  shodan:
+    - AfpEYenGK9jqdd5QI0DyJpsr2CK9VaP7
+  securitytrails:
+    - f8n1cbbqOeK0nB490zCtRaQuudKKP9Lb
+    - QX2zgbK2iLidSsAOFO5cd2XygrIdZ2oL
+    

@@ -1,139 +1,54 @@
 package runner
 
 import (
+	"net/http"
+	"strings"
+
 	"subenum/pkg/active/alterx"
 	dnsprobe "subenum/pkg/active/dnsbrobe"
 	"subenum/pkg/active/zonetransfer"
-
-	"github.com/cyinnove/logify"
-
-	// "subenum/pkg/active/bruteforce"
 	"subenum/pkg/scraper"
 	"subenum/pkg/scraper/sources"
 	"subenum/pkg/utils"
+
+	"github.com/cyinnove/logify"
 )
 
 func Run(opts *Options) error {
-
-	// Handling UserInput
-	// read queries
-	opts.queries = utils.ExtractDomainsFromString(opts.Query)
-	// check if domains read from a file
-	if opts.Query == "" && opts.InputFile == "" {
-		logify.Fatalf("No input or file specified")
-	}
-
-	if opts.InputFile != "" {
-		var err error
-		opts.queries, err = utils.ReadInputFromFile(opts.InputFile)
-		if err != nil {
-			logify.Fatalf("Error reading input file %s: %s", opts.InputFile, err)
-		}
-	}
-
-	if len(opts.queries) == 0 {
-		logify.Fatalf("No input or file specified")
-	}
-
-	// read config
-	apiKeys, err := scraper.ExtractALLAPIKeys()
+	queries, err := loadQueries(opts)
 	if err != nil {
-		logify.Fatalf("Error extracting API keys: %s", err)
+		return err
 	}
 
-	var allResults map[string]bool
+	srcs, client, err := loadSources(opts)
+	if err != nil {
+		return err
+	}
 
-	allResults = map[string]bool{}
-	uniqueSubdomains := []string{}
+	set := newDomainSet(opts.Verbose)
 
-	// Get all available sources once
-	client := scraper.NewSession(opts.Timeout)
-	srcs := sources.GetAllSources(apiKeys)
-
-	logify.Infof("Loaded %d source(s) for enumeration", len(srcs))
-
-	// enumeration for each domain
-	for _, q := range opts.queries {
+	for _, q := range queries {
 		logify.Infof("Starting passive enumeration for: %s", q)
 
-		queryResults := 0
+		queryCount := runPassive(q, srcs, client, opts, set)
 
-		for _, src := range srcs {
-			domains, err := src.Search(q, client)
-			if err != nil {
-				// Only log errors in verbose mode
-				if opts.Verbose {
-					logify.Errorf("Source %s failed: %s", src.Name(), err)
-				}
-				continue
-			}
-
-			for _, domain := range domains {
-				if !allResults[domain] {
-					logify.Silentf("%s", domain)
-					allResults[domain] = true
-					queryResults++
-				}
-			}
-		}
-
-		// Zone transfer check during passive enumeration
 		if opts.ActiveEnabled {
-			if zonetransfer.IsVulnerable(q, opts.Timeout) {
-				logify.Infof("Zone transfer vulnerability detected for %s", q)
-				zoneSubs, err := zonetransfer.GetSubdomains(q, opts.Timeout)
-				if err != nil {
-					logify.Errorf("Zone transfer failed for %s: %s", q, err)
-				} else {
-					for _, s := range zoneSubs {
-						if !allResults[s] {
-							logify.Silentf("%s", s)
-							allResults[s] = true
-							uniqueSubdomains = append(uniqueSubdomains, s)
-							queryResults++
-						}
-					}
-					logify.Infof("Zone transfer discovered %d subdomain(s) for %s", len(zoneSubs), q)
-				}
-			}
+			queryCount += runZoneTransfer(q, opts, set)
 		}
 
-		logify.Infof("Query %s: Found %d unique subdomain(s) (Total: %d)", q, queryResults, len(allResults))
+		logify.Infof("Query %s: Found %d unique subdomain(s) (Total: %d)", q, queryCount, set.Len())
 	}
 
-	for domain := range allResults {
-		uniqueSubdomains = append(uniqueSubdomains, domain)
-	}
-
+	uniqueSubdomains := set.Slice()
 	logify.Infof("Passive enumeration completed: Found %d unique subdomain(s)", len(uniqueSubdomains))
 
 	if opts.ActiveEnabled {
-		logify.Infof("Starting active enumeration for %d subdomain(s)", len(uniqueSubdomains))
-
-		// 1. Permutation & Mutation
-		mutationSubs, err := alterx.RunMutator(uniqueSubdomains, opts.MaxMutationsSize, opts.Enrich)
+		newActiveCount, err := runActive(uniqueSubdomains, opts, set)
 		if err != nil {
-			logify.Errorf("Mutation generation failed: %s", err)
 			return err
 		}
-
-		logify.Infof("Generated %d mutation(s)", len(mutationSubs))
-
-		// 2. DNS Probing - Validate the mutated subdomains
-		aliveSubdomains := dnsprobe.ProbeSubdomains(mutationSubs, opts.Timeout, opts.Concurrency)
-
-		// 3. Add alive subdomains to results
-		newActiveCount := 0
-		for _, subdomain := range aliveSubdomains {
-			if !allResults[subdomain] {
-				logify.Silentf("%s", subdomain)
-				allResults[subdomain] = true
-				uniqueSubdomains = append(uniqueSubdomains, subdomain)
-				newActiveCount++
-			}
-		}
-
-		logify.Infof("Active enumeration completed: Found %d new subdomain(s) (Total: %d)", newActiveCount, len(allResults))
+		uniqueSubdomains = set.Slice()
+		logify.Infof("Active enumeration completed: Found %d new subdomain(s) (Total: %d)", newActiveCount, set.Len())
 	}
 
 	if opts.OutputFile != "" {
@@ -143,4 +58,156 @@ func Run(opts *Options) error {
 	}
 
 	return nil
+}
+
+/* ---------------- Helpers ---------------- */
+
+func loadQueries(opts *Options) ([]string, error) {
+	// read queries from direct input
+	opts.queries = utils.ExtractDomainsFromString(opts.Query)
+
+	if opts.Query == "" && opts.InputFile == "" {
+		logify.Fatalf("No input or file specified")
+	}
+
+	// or from file
+	if opts.InputFile != "" {
+		q, err := utils.ReadInputFromFile(opts.InputFile)
+		if err != nil {
+			logify.Fatalf("Error reading input file %s: %s", opts.InputFile, err)
+		}
+		opts.queries = q
+	}
+
+	if len(opts.queries) == 0 {
+		logify.Fatalf("No input or file specified")
+	}
+
+	return opts.queries, nil
+}
+
+func loadSources(opts *Options) ([]scraper.Source, *http.Client, error) {
+	apiKeys, err := scraper.ExtractALLAPIKeys()
+	if err != nil {
+		logify.Fatalf("Error extracting API keys: %s", err)
+	}
+
+	client := scraper.NewSession(opts.Timeout)
+	srcs := sources.GetAllSources(apiKeys)
+
+	logify.Infof("Loaded %d source(s) for enumeration", len(srcs))
+	return srcs, client, nil
+}
+
+func runPassive(q string, srcs []scraper.Source, client *http.Client, opts *Options, set *domainSet) int {
+	count := 0
+
+	for _, src := range srcs {
+		domains, err := src.Search(q, client)
+		if err != nil {
+			if opts.Verbose {
+				logify.Errorf("Source %s failed: %s", src.Name(), err)
+			}
+			continue
+		}
+
+		for _, d := range domains {
+			if shouldSkip(d) {
+				continue
+			}
+			if set.Add(d) {
+				count++
+			}
+		}
+	}
+
+	return count
+}
+
+func runZoneTransfer(q string, opts *Options, set *domainSet) int {
+	if !zonetransfer.IsVulnerable(q, opts.Timeout) {
+		return 0
+	}
+
+	logify.Infof("Zone transfer vulnerability detected for %s", q)
+
+	zoneSubs, err := zonetransfer.GetSubdomains(q, opts.Timeout)
+	if err != nil {
+		logify.Errorf("Zone transfer failed for %s: %s", q, err)
+		return 0
+	}
+
+	added := 0
+	for _, s := range zoneSubs {
+		if set.Add(s) {
+			added++
+		}
+	}
+
+	logify.Infof("Zone transfer discovered %d subdomain(s) for %s", len(zoneSubs), q)
+	return added
+}
+
+func runActive(uniqueSubdomains []string, opts *Options, set *domainSet) (int, error) {
+	logify.Infof("Starting active enumeration for %d subdomain(s)", len(uniqueSubdomains))
+
+	mutationSubs, err := alterx.RunMutator(uniqueSubdomains, opts.MaxMutationsSize, opts.Enrich)
+	if err != nil {
+		logify.Errorf("Mutation generation failed: %s", err)
+		return 0, err
+	}
+	logify.Infof("Generated %d mutation(s)", len(mutationSubs))
+
+	alive := dnsprobe.ProbeSubdomains(mutationSubs, opts.Timeout, opts.Concurrency)
+
+	newCount := 0
+	for _, s := range alive {
+		if set.Add(s) {
+			newCount++
+		}
+	}
+	return newCount, nil
+}
+
+func shouldSkip(domain string) bool {
+	// keep your existing filters
+	if strings.Contains(domain, "playat") || strings.Contains(domain, "••") {
+		return true
+	}
+	return false
+}
+
+/* ---------------- Set with logging ---------------- */
+
+type domainSet struct {
+	m       map[string]struct{}
+	verbose bool
+}
+
+func newDomainSet(verbose bool) *domainSet {
+	return &domainSet{
+		m:       make(map[string]struct{}),
+		verbose: verbose,
+	}
+}
+
+func (s *domainSet) Add(domain string) bool {
+	if _, ok := s.m[domain]; ok {
+		return false
+	}
+	s.m[domain] = struct{}{}
+
+	// Keep same behavior: print new domains immediately
+	logify.Silentf("%s", domain)
+	return true
+}
+
+func (s *domainSet) Len() int { return len(s.m) }
+
+func (s *domainSet) Slice() []string {
+	out := make([]string, 0, len(s.m))
+	for d := range s.m {
+		out = append(out, d)
+	}
+	return out
 }
