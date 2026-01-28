@@ -73,6 +73,7 @@ mutation is time consuming, so it is important to limit it
 ```bash
 go run . -active -c 20 -i domains.txt -o subs.txt -e -max-mutations-size 50
 ```
+To Be Updated -> The tool doesn't brute force in active enumeration 
 
 
 
