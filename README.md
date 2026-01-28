@@ -47,6 +47,20 @@ You can add or edit api for all tools in this file https://github.com/noureldinS
 
 
 
+# DnsEnum 
+Check the existence of targest and you can get all dns records A,AAAA,CNAME, .... 
+go to ./main.go file 
+run 
+```go
+go run ./main.go -h
+```
+usage example
+```go
+go run . -l swisscomDomains.txt -o swisscomDns.txt -of lines -c 20
+```
+
+
+
 
 
 
