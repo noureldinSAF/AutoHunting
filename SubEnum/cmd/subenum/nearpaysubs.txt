@@ -1,0 +1,3 @@
+sa-dev.nearpay.io
+sa-dev-admin.nearpay.io
+sa-dev-api.nearpay.io
