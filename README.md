@@ -59,6 +59,18 @@ usage example
 go run . -l swisscomDomains.txt -o swisscomDns.txt -of lines -c 20
 ```
 
+# SubEnum
+Enumerate subdomains
+go inside this folder SubEnum/cmd/subenum
+```bash
+go run . -h
+```
+usage example
+```bash
+go run . -active -c 10 -i domains.txt -o subs.txt
+```
+
+
 
 
 
