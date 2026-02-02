@@ -75,8 +75,15 @@ go run . -active -c 20 -i domains.txt -o subs.txt -e -max-mutations-size 50
 ```
 To Be Updated -> The tool doesn't brute force in active enumeration 
 
-
-
+# vhost - virual host enumeration 
+You will know which subdomains works on which ip
+```bash
+go run . -hosts subs.txt -output vhostedSubs
+```
+# Port Scanner
+```bash
+go run . -host-file subs.txt -host-threads 52 -threads 86 -output-file ports.txt -timeout 3
+```
 
 
 
