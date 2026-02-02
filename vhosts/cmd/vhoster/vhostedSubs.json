@@ -17,19 +17,19 @@
   ],
   "104.18.32.238": [
     "opti-portal.kafd.sa",
-    "uat-opti-portal.kafd.sa",
-    "opti.kafd.sa"
+    "opti.kafd.sa",
+    "uat-opti-portal.kafd.sa"
   ],
   "104.20.21.189": [
-    "autodiscoverredirect.kafd.sa",
     "suppliers.kafd.sa",
+    "autodiscoverredirect.kafd.sa",
     "eam.kafd.sa",
     "mail.kafd.sa",
     "webmail.kafd.sa",
-    "residences.kafd.sa",
     "uat.opti.kafd.sa",
     "autodiscover.kafd.sa",
-    "newsuppliers.kafd.sa"
+    "newsuppliers.kafd.sa",
+    "residences.kafd.sa"
   ],
   "15.197.167.90": [
     "www.flagyard.com",
@@ -39,19 +39,19 @@
   ],
   "172.64.155.18": [
     "opti-portal.kafd.sa",
-    "uat-opti-portal.kafd.sa",
-    "opti.kafd.sa"
+    "opti.kafd.sa",
+    "uat-opti-portal.kafd.sa"
   ],
   "172.66.164.145": [
-    "autodiscoverredirect.kafd.sa",
     "suppliers.kafd.sa",
+    "autodiscoverredirect.kafd.sa",
     "eam.kafd.sa",
     "mail.kafd.sa",
     "webmail.kafd.sa",
-    "residences.kafd.sa",
     "uat.opti.kafd.sa",
     "autodiscover.kafd.sa",
-    "newsuppliers.kafd.sa"
+    "newsuppliers.kafd.sa",
+    "residences.kafd.sa"
   ],
   "18.199.16.2": [
     "tickets.kafd.sa"
@@ -97,6 +97,9 @@
   "3.73.179.192": [
     "tickets.kafd.sa"
   ],
+  "35.157.56.223": [
+    "tickets.kafd.sa"
+  ],
   "35.159.4.227": [
     "tickets.kafd.sa"
   ],
@@ -109,15 +112,12 @@
   "63.181.218.240": [
     "tickets.kafd.sa"
   ],
-  "63.182.105.124": [
-    "tickets.kafd.sa"
-  ],
-  "63.182.90.150": [
+  "63.182.192.38": [
     "tickets.kafd.sa"
   ],
   "91.209.253.18": [
-    "bb-files.bugbounty.sa",
     "www.bugbounty.sa",
+    "bb-files.bugbounty.sa",
     "stg.bugbounty.sa",
     "bugbounty.sa"
   ],
