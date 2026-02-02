@@ -55,6 +55,13 @@ func main() {
 		if targetURL == "" {
 			continue
 		}
+		targetURL = strings.TrimSpace(scanner.Text())
+          if targetURL == "" {
+           continue
+           }
+          if !strings.HasPrefix(targetURL, "http://") && !strings.HasPrefix(targetURL, "https://") {
+           targetURL = "https://" + targetURL
+         }
 
 		parsedURL, err := url.Parse(targetURL)
 		if err != nil {
