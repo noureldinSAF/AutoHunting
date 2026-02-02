@@ -85,6 +85,12 @@ go run . -hosts subs.txt -output vhostedSubs
 go run . -host-file subs.txt -host-threads 52 -threads 86 -output-file ports.txt -timeout 3
 ```
 
-
-
+# URLEnum - crawling 
+```go
+cat subs.txt | go run . -depth 4 -output urls.txt -threads 52
+```
+# URLEnum - headless 
+```bash
+go run . -l subs.txt -o urls.txt -c 10
+```
 
