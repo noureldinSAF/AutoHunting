@@ -1,0 +1,9 @@
+@noureldinSAF ➜ /workspaces/AutoHunting (main) $ git pull --rebase origin main
+From https://github.com/noureldinSAF/AutoHunting
+ * branch            main       -> FETCH_HEAD
+Successfully rebased and updated refs/heads/main.
+@noureldinSAF ➜ /workspaces/AutoHunting (main) $ git add .
+@noureldinSAF ➜ /workspaces/AutoHunting (main) $ git rebase --continue
+fatal: no rebase in progress
+@noureldinSAF ➜ /workspaces/AutoHunting (main) $ git push origin main
+Enumerating objects: 19, done.
