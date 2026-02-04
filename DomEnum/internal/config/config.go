@@ -16,7 +16,7 @@ type Config struct {
 
 func ReadConfig() (*Config, error) {
 	// Initialize the path inside the function
-	configFile = filepath.Join(os.Getenv("F"), "internal", "config", "config.yaml")
+	configFile = filepath.Join(os.Getenv("F"), "config.yaml")
 
 	dir := filepath.Dir(configFile)
 	

@@ -46,8 +46,8 @@ func Run(opts *Options) error {
 		logify.Fatalf("Error reading API keys: %v", err)
 	}
 
-	var allResults map[string]bool
-	allResults = make(map[string]bool)
+	allResults := map[string]bool{}
+
 
 	for _, q := range opts.queries {
 

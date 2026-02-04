@@ -1,4 +1,4 @@
-package runner
+package test
 
 type Options struct {
 	Domain        string
@@ -8,4 +8,5 @@ type Options struct {
 	Output        string
 	ActiveEnabled bool
 	queries []string
+	IncludeSubdomains bool
 }
