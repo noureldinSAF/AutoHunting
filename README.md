@@ -94,3 +94,7 @@ cat subs.txt | go run . -depth 4 -output urls.txt -threads 52
 go run . -l subs.txt -o urls.txt -c 10
 ```
 
+# URLEnum ( passive and active ) 
+```bash
+```
+
