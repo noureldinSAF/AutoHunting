@@ -90,9 +90,13 @@ go run . -host-file subs.txt -host-threads 52 -threads 86 -output-file ports.txt
 go run . -i subs.txt -o urls1.txt -pc 20 -ac 50  -timeout 400 -subs -active 
 ```
 Notes : 
-commoncrawl doesn't work in codespace, So If you are using the tool in another vps, change RequireAPIKey function to ```func (s *Source) RequireAPIKey() bool { return false }```
+
+commoncrawl doesn't work in codespace, So If you are using the tool in another vps, change RequireAPIKey function to ```func (s *Source) RequireAPIKey() bool { return false }``` in commoncrawl.go file
+
 2- timeout is important becasue of headless
+
 3- The more concurrency the less effeciency
+
 4- passive enumeration may take 2-3 minutes, but active enumeration may take 1 hour. 
 
 
