@@ -85,16 +85,17 @@ go run . -hosts subs.txt -output vhostedSubs
 go run . -host-file subs.txt -host-threads 52 -threads 86 -output-file ports.txt -timeout 3
 ```
 
-# URLEnum - crawling 
-```go
-cat subs.txt | go run . -depth 4 -output urls.txt -threads 52
-```
-# URLEnum - headless 
-```bash
-go run . -l subs.txt -o urls.txt -c 10
-```
-
 # URLEnum ( passive and active ) 
 ```bash
+go run . -i subs.txt -o urls1.txt -pc 20 -ac 50  -timeout 400 -subs -active 
 ```
+Notes : 
+commoncrawl doesn't work in codespace, So If you are using the tool in another vps, change RequireAPIKey function to ```func (s *Source) RequireAPIKey() bool { return false }```
+2- timeout is important becasue of headless
+3- The more concurrency the less effeciency
+4- passive enumeration may take 2-3 minutes, but active enumeration may take 1 hour. 
+
+
+
+
 
