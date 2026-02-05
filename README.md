@@ -99,6 +99,10 @@ commoncrawl doesn't work in codespace, So If you are using the tool in another v
 
 4- passive enumeration may take 2-3 minutes, but active enumeration may take 1 hour. 
 
+5- If the tool finds svg, jpeg, jpg, and other non script files, it will discard it automatically. So the tool is enumerate the important files
+
+6- The tool gives you unique results by default
+
 
 
 
