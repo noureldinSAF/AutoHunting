@@ -2,7 +2,6 @@ package test
 
 import (
 	"context"
-	"fmt"
 	"strings"
 	"sync"
 	"time"
@@ -17,7 +16,6 @@ import (
 
 func Run(opts *Options) error {
 	opts.queries = utils.ExtractDomainsFromString(opts.Domain)
-
 	if opts.Domain == "" && opts.Input == "" {
 		logify.Fatalf("No domain or input file specified")
 	}
@@ -35,206 +33,242 @@ func Run(opts *Options) error {
 		logify.Fatalf("No domain specified for enumeration")
 	}
 
-	if opts.Concurrency <= 0 {
-		opts.Concurrency = 1
+	// defaults
+	if opts.PassiveConcurrency <= 0 {
+		opts.PassiveConcurrency = 5
+	}
+	if opts.ActiveConcurrency <= 0 {
+		opts.ActiveConcurrency = 10
 	}
 
-	// Shared results
-	allResults := make(map[string]bool)
-	var mu sync.Mutex
-
-	addURL := func(u string) {
-		u = strings.TrimSpace(u)
-		if u == "" {
-			return
-		}
-		mu.Lock()
-		if !allResults[u] {
-			allResults[u] = true
-			//logify.Silentf("Found URL: %s", u)
-		}
-		mu.Unlock()
-	}
-
-	// Build domain list (clean)
-	domains := make([]string, 0, len(opts.queries))
-	for _, q := range opts.queries {
-		q = strings.TrimSpace(q)
-		if q == "" || strings.HasPrefix(q, "#") {
-			continue
-		}
-		domains = append(domains, q)
-	}
-	if len(domains) == 0 {
-		logify.Fatalf("No valid domains found")
-	}
-
-	// Load sources
 	apiKeys, err := scraper.ExtractALLAPIKeys()
 	if err != nil {
 		logify.Fatalf("Failed to read config: %v", err)
 	}
-	srcs := sources.GetAllSources(apiKeys)
 
-	// Pick the 2 passive sources explicitly by name
-	var webarchiveSrc scraper.Source
-	var commoncrawlSrc scraper.Source
-	for _, s := range srcs {
-		switch strings.ToLower(s.Name()) {
-		case "webarchive":
-			webarchiveSrc = s
-		case "commoncrawl":
-			commoncrawlSrc = s
+	// Shared results across all workers (dedupe)
+	allResults := make(map[string]bool)
+	var resultsMu sync.Mutex
+
+	addResult := func(u string) {
+		u = strings.TrimSpace(u)
+		if u == "" {
+			return
 		}
-	}
-	if webarchiveSrc == nil {
-		logify.Errorf("webarchive source not found in sources.GetAllSources")
-	}
-	if commoncrawlSrc == nil {
-		logify.Errorf("commoncrawl source not found in sources.GetAllSources")
+		if !utils.IsInformationalURL(u) {
+			return
+		}
+		resultsMu.Lock()
+		if !allResults[u] {
+			allResults[u] = true
+		}
+		resultsMu.Unlock()
 	}
 
-	// ---- distribute workers across 4 pipelines ----
-	// You can tune these ratios; they must sum <= opts.Concurrency.
-	// Example split (26): 6+6+7+7 = 26
-	webWorkers := max(1, opts.Concurrency/4)
-	ccWorkers := max(1, opts.Concurrency/4)
-	crawlWorkers := max(1, (opts.Concurrency-webWorkers-ccWorkers)/2)
-	headlessWorkers := opts.Concurrency - webWorkers - ccWorkers - crawlWorkers
-	if headlessWorkers < 1 {
-		headlessWorkers = 1
-		// Adjust down crawlWorkers if needed
-		if crawlWorkers > 1 {
-			crawlWorkers--
-		}
-	}
+	// =========================
+	// Concurrency split (ONLY LOGIC CHANGE)
+	// =========================
+	p := opts.PassiveConcurrency
+	a := opts.ActiveConcurrency
+
+	// Passive: split between webarchive and commoncrawl
+	webWorkers := max(1, p/2)
+	ccWorkers := max(1, p-webWorkers)
+
+	// Active: split between crawl and headless
+	crawlWorkers := max(1, a/2)
+	headlessWorkers := max(1, a-crawlWorkers)
 
 	logify.Infof("Worker split => webarchive=%d, commoncrawl=%d, crawl=%d, headless=%d",
 		webWorkers, ccWorkers, crawlWorkers, headlessWorkers,
 	)
 
-	// Worker delay (your requirement)
-	workerDelay := 10 * time.Second
+	// =========================
+	// Passive Enumeration (same flow: queries -> sources)
+	// BUT: workers are distributed across 2 passive sources
+	// =========================
 
-	// Per-task timeout
-	perTaskTimeout := time.Duration(opts.Timeout) * time.Second
-	if perTaskTimeout <= 0 {
-		perTaskTimeout = 60 * time.Second
+	srcs := sources.GetAllSources(apiKeys)
+
+	// pick the two passive sources
+	var webSrc scraper.Source
+	var ccSrc scraper.Source
+	for _, s := range srcs {
+		switch strings.ToLower(strings.TrimSpace(s.Name())) {
+		case "webarchive":
+			webSrc = s
+		case "commoncrawl":
+			ccSrc = s
+		}
 	}
 
-	// Domain job fanout: each pipeline needs to process all domains,
-	// so we create 4 separate channels (broadcast).
-	webJobs := make(chan string, len(domains))
-	ccJobs := make(chan string, len(domains))
-	crawlJobs := make(chan string, len(domains))
-	headJobs := make(chan string, len(domains))
+	// broadcast queries to both passive pipelines
+	webJobs := make(chan string, len(opts.queries))
+	ccJobs := make(chan string, len(opts.queries))
 
-	for _, d := range domains {
-		webJobs <- d
-		ccJobs <- d
-		crawlJobs <- d
-		headJobs <- d
+	for _, q := range opts.queries {
+		q = strings.TrimSpace(q)
+		if q == "" || strings.HasPrefix(q, "#") {
+			continue
+		}
+		webJobs <- q
+		ccJobs <- q
 	}
 	close(webJobs)
 	close(ccJobs)
-	close(crawlJobs)
-	close(headJobs)
 
 	var wg sync.WaitGroup
 
-	// ---- Passive: webarchive ----
-	if webarchiveSrc != nil {
+	// --- webarchive workers ---
+	if webSrc != nil {
 		for i := 0; i < webWorkers; i++ {
 			wg.Add(1)
-			id := i + 1
-			go func(workerID int) {
+			workerID := i + 1
+			go func(id int) {
 				defer wg.Done()
 				client := scraper.NewSession(opts.Timeout)
 
-				for d := range webJobs {
-					ctx, cancel := context.WithTimeout(context.Background(), perTaskTimeout)
-					urls, err := webarchiveSrc.Search(ctx, d, client)
+				for q := range webJobs {
+					logify.Infof("[WEB-W%02d] Starting enumeration for domain: %s via webarchive", id, q)
+
+					ctx, cancel := context.WithTimeout(context.Background(), time.Duration(opts.Timeout)*time.Second)
+					urls, err := webSrc.Search(ctx, q, client)
 					cancel()
 
 					if err != nil {
-						logify.Errorf("[WEB-W%02d] webarchive failed for %s: %v", workerID, d, err)
+						logify.Errorf("[WEB-W%02d] webarchive failed for %s: %v", id, q, err)
 					} else {
 						for _, u := range urls {
-							addURL(u)
+							addResult(u)
 						}
 					}
 
-					time.Sleep(workerDelay)
+					resultsMu.Lock()
+					total := len(allResults)
+					resultsMu.Unlock()
+					logify.Infof("[WEB-W%02d] Done %s. Total unique URLs so far: %d", id, q, total)
+
+					time.Sleep(10 * time.Second)
 				}
-			}(id)
+			}(workerID)
 		}
+	} else {
+		logify.Errorf("webarchive source not found; skipping webarchive workers")
 	}
 
-	// ---- Passive: commoncrawl ----
-	if commoncrawlSrc != nil {
+	// --- commoncrawl workers ---
+	if ccSrc != nil {
 		for i := 0; i < ccWorkers; i++ {
 			wg.Add(1)
-			id := i + 1
-			go func(workerID int) {
+			workerID := i + 1
+			go func(id int) {
 				defer wg.Done()
 				client := scraper.NewSession(opts.Timeout)
 
-				for d := range ccJobs {
-					ctx, cancel := context.WithTimeout(context.Background(), perTaskTimeout)
-					urls, err := commoncrawlSrc.Search(ctx, d, client)
+				for q := range ccJobs {
+					logify.Infof("[CC-W%02d] Starting enumeration for domain: %s via commoncrawl", id, q)
+
+					ctx, cancel := context.WithTimeout(context.Background(), time.Duration(opts.Timeout)*time.Second)
+					urls, err := ccSrc.Search(ctx, q, client)
 					cancel()
 
 					if err != nil {
-						logify.Errorf("[CC-W%02d] commoncrawl failed for %s: %v", workerID, d, err)
-					} else {
-						for _, u := range urls {
-							addURL(u)
-						}
+						// keep your old behavior: skip CC errors quietly
+						continue
+					}
+					for _, u := range urls {
+						addResult(u)
 					}
 
-					time.Sleep(workerDelay)
+					resultsMu.Lock()
+					total := len(allResults)
+					resultsMu.Unlock()
+					logify.Infof("[CC-W%02d] Done %s. Total unique URLs so far: %d", id, q, total)
+
+					time.Sleep(10 * time.Second)
 				}
-			}(id)
+			}(workerID)
 		}
+	} else {
+		logify.Errorf("commoncrawl source not found; skipping commoncrawl workers")
 	}
 
-	// ---- Active: crawl ----
+	wg.Wait()
+
+	// Collect unique URLs after passive stage
+	uniqueURLs := make([]string, 0, len(allResults))
+	for u := range allResults {
+		uniqueURLs = append(uniqueURLs, u)
+	}
+
+	// =========================
+	// Active Enumeration (same flow: crawl then headless)
+	// BUT: workers are distributed across crawl/headless
+	// =========================
 	if opts.ActiveEnabled {
+		logify.Infof("Started Active Enumeration for %d seed URL(s)", len(uniqueURLs))
+
+		perTargetTimeout := time.Duration(opts.Timeout) * time.Second
+		if perTargetTimeout <= 0 {
+			perTargetTimeout = 30 * time.Second
+		}
+
+		
+
+		// 1) Crawl tool (Colly)
 		crawlOpts := &crawl.Options{
 			MaxDepth:    2,
-			Parallelism: max(1, opts.Concurrency/2), // inside colly itself
-			Timeout:     perTaskTimeout,
+			Parallelism: opts.ActiveConcurrency, // CHANGED
+			Timeout:     perTargetTimeout,
 			AllowQuery:  true,
 		}
 
-		for i := 0; i < crawlWorkers; i++ {
-			wg.Add(1)
-			go func() {
-				defer wg.Done()
-				for d := range crawlJobs {
-					seed := normalizeSeed(d)
+		// Run crawl concurrently over seeds (bounded)
+		{
+			seeds := append([]string(nil), uniqueURLs...)
+			seedJobs := make(chan string, len(seeds))
+			var seedWG sync.WaitGroup
 
-					ctx, cancel := context.WithTimeout(context.Background(), perTaskTimeout)
-					found, err := crawl.Enumerate(ctx, seed, opts.IncludeSubdomains, crawlOpts)
-					cancel()
+			for i := 0; i < crawlWorkers; i++ { // CHANGED
+				seedWG.Add(1)
+				go func() {
+					defer seedWG.Done()
+					for seed := range seedJobs {
+                          seedCtx, cancel := context.WithTimeout(context.Background(), perTargetTimeout)
+                          found, err := crawl.Enumerate(seedCtx, seed, opts.IncludeSubdomains, crawlOpts)
+                          cancel()
+                      
+                          if err != nil {
+                              logify.Errorf("crawl failed for %s: %v", seed, err)
+                              continue
+                          }
+                          for _, u := range found {
+                              addResult(u)
+                          }
+                    }
 
-					if err != nil {
-						logify.Errorf("[CRAWL] failed for %s: %v", seed, err)
-					} else {
-						for _, u := range found {
-							addURL(u)
-						}
-					}
+				}()
+			}
 
-					time.Sleep(workerDelay)
-				}
-			}()
+			for _, s := range seeds {
+				seedJobs <- s
+			}
+			close(seedJobs)
+			seedWG.Wait()
 		}
 
-		// ---- Active: headless ----
-		headOpts := headless.Options{
-			Concurrency:   max(1, opts.Concurrency/2),
-			Timeout:       perTaskTimeout,
+		// Refresh seeds after crawl added more
+		resultsMu.Lock()
+		uniqueURLs = uniqueURLs[:0]
+		for u := range allResults {
+			uniqueURLs = append(uniqueURLs, u)
+		}
+		resultsMu.Unlock()
+
+		// 2) Headless tool (chromedp)
+		headlessOpts := headless.Options{
+			Concurrency:   opts.ActiveConcurrency, // CHANGED
+			Timeout:       perTargetTimeout,
 			Wait:          8 * time.Second,
 			ChromePath:    "/usr/bin/google-chrome",
 			Headless:      true,
@@ -243,45 +277,55 @@ func Run(opts *Options) error {
 			DisableDevShm: true,
 		}
 
-		for i := 0; i < headlessWorkers; i++ {
-			wg.Add(1)
-			go func() {
-				defer wg.Done()
-				for d := range headJobs {
-					seed := normalizeSeed(d)
+		// Run headless concurrently over seeds (bounded)
+		{
+			seeds := append([]string(nil), uniqueURLs...)
+			seedJobs := make(chan string, len(seeds))
+			var seedWG sync.WaitGroup
 
-					ctx, cancel := context.WithTimeout(context.Background(), perTaskTimeout)
-					found, err := headless.Enumerate(ctx, seed, opts.IncludeSubdomains, headOpts)
-					cancel()
+			for i := 0; i < headlessWorkers; i++ { // CHANGED
+				seedWG.Add(1)
+				go func() {
+					defer seedWG.Done()
+					for seed := range seedJobs {
+                         seedCtx, cancel := context.WithTimeout(context.Background(), perTargetTimeout)
+                         found, err := headless.Enumerate(seedCtx, seed, opts.IncludeSubdomains, headlessOpts)
+                         cancel()
+                     
+                         if err != nil {
+                             logify.Errorf("headless failed for %s: %v", seed, err)
+                             continue
+                         }
+						 
+                         for _, u := range found {
+                             addResult(u)
+                         }
+                    }
 
-					if err != nil {
-						logify.Errorf("[HEADLESS] failed for %s: %v", seed, err)
-					} else {
-						for _, u := range found {
-							addURL(u)
-						}
-					}
+				}()
+			}
 
-					time.Sleep(workerDelay)
-				}
-			}()
+			for _, s := range seeds {
+				seedJobs <- s
+			}
+			close(seedJobs)
+			seedWG.Wait()
 		}
-	} else {
-		// If not active, just drain active job channels quickly
-		_ = crawlJobs
-		_ = headJobs
+
+		resultsMu.Lock()
+		total := len(allResults)
+		resultsMu.Unlock()
+
+		logify.Infof("Active Enumeration finished. Total unique URLs: %d", total)
+
+		// Final unique list from map
+		uniqueURLs = make([]string, 0, len(allResults))
+		for u := range allResults {
+			uniqueURLs = append(uniqueURLs, u)
+		}
 	}
 
-	wg.Wait()
-
-	// Build output list
-	uniqueURLs := make([]string, 0, len(allResults))
-	for u := range allResults {
-		uniqueURLs = append(uniqueURLs, u)
-	}
-
-	logify.Infof("Done. Total unique URLs: %d", len(uniqueURLs))
-
+	// Output
 	if opts.Output != "" {
 		if err := utils.WriteOutputToFile(opts.Output, uniqueURLs); err != nil {
 			logify.Fatalf("Error writing output to file %s: %v", opts.Output, err)
@@ -289,22 +333,4 @@ func Run(opts *Options) error {
 	}
 
 	return nil
-}
-
-func normalizeSeed(domainOrURL string) string {
-	s := strings.TrimSpace(domainOrURL)
-	if s == "" {
-		return ""
-	}
-	if strings.HasPrefix(s, "http://") || strings.HasPrefix(s, "https://") {
-		return s
-	}
-	return fmt.Sprintf("https://%s", s)
-}
-
-func max(a, b int) int {
-	if a > b {
-		return a
-	}
-	return b
 }

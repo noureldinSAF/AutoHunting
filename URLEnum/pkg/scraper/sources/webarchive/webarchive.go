@@ -37,9 +37,9 @@ func (s *Source) Search(ctx context.Context, query string, client *http.Client) 
 
 	// Retry policy (tune)
 	const (
-		maxRetries = 8
+		maxRetries = 3
 		baseDelay  = 500 * time.Millisecond
-		maxDelay   = 30 * time.Second
+		maxDelay   = 20 * time.Second
 	)
 
 	var lastErr error

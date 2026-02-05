@@ -10,35 +10,33 @@ import (
 	"time"
 
 	"github.com/corpix/uarand"
+	"github.com/cyinnove/logify"
 	"github.com/gocolly/colly/v2"
 )
 
 type Options struct {
-	MaxDepth     int
-	Parallelism  int
-	Timeout      time.Duration
-	AllowQuery   bool // keep query params (default true if you want)
+	MaxDepth    int
+	Parallelism int
+	Timeout     time.Duration
+	AllowQuery  bool // keep query params
 }
 
 // normalizeURL normalizes a URL by removing fragments and trailing slashes.
-// It keeps query params (if opts.AllowQuery == true).
+// It keeps query params if allowQuery is true.
 func normalizeURL(u *url.URL, allowQuery bool) string {
 	if u == nil {
 		return ""
 	}
 
-	// Copy to avoid mutating caller
 	uu := *u
 	uu.Fragment = ""
 
 	path := uu.Path
-	// Remove trailing slash except for root path
 	if path != "/" && strings.HasSuffix(path, "/") {
 		path = strings.TrimSuffix(path, "/")
 	}
 	uu.Path = path
 
-	// Build
 	normalized := uu.Scheme + "://" + uu.Host + uu.Path
 	if allowQuery && uu.RawQuery != "" {
 		normalized += "?" + uu.RawQuery
@@ -47,6 +45,7 @@ func normalizeURL(u *url.URL, allowQuery bool) string {
 }
 
 func defaultOptions(opts *Options) Options {
+	// FIX: do not reference runner variables here (opts.ActiveConcurrency/perTargetTimeout)
 	if opts == nil {
 		return Options{
 			MaxDepth:    2,
@@ -55,6 +54,7 @@ func defaultOptions(opts *Options) Options {
 			AllowQuery:  true,
 		}
 	}
+
 	o := *opts
 	if o.MaxDepth <= 0 {
 		o.MaxDepth = 2
@@ -65,8 +65,7 @@ func defaultOptions(opts *Options) Options {
 	if o.Timeout <= 0 {
 		o.Timeout = 15 * time.Second
 	}
-	// AllowQuery: keep whatever user set; if zero-value false is desired, caller can set it.
-	// If you want default true always, uncomment:
+	// If you want default true even when caller didn't set it:
 	// if !opts.AllowQuery { o.AllowQuery = true }
 	return o
 }
@@ -86,16 +85,16 @@ func hostAllowed(host, rootHost string, includeSubDomains bool) bool {
 	if !includeSubDomains {
 		return false
 	}
-	// Allow *.rootHost
 	return strings.HasSuffix(host, "."+rootHost)
 }
 
-// Enumerate crawls starting from `start` and returns a unique list of normalized URLs visited/discovered
-// (depending on what you emit). This keeps your “emit on request” logic and also visits discovered links.
+// Enumerate crawls starting from `start` and returns a unique list of normalized URLs visited/discovered.
 func Enumerate(ctx context.Context, start string, includeSubDomains bool, opts *Options) ([]string, error) {
+	logify.Infof("Starting crawl enumeration for %s (includeSubDomains=%v)", start, includeSubDomains)
+	// NOTE: removed fmt.Println to avoid slowing down concurrent runs
 	o := defaultOptions(opts)
 
-	if start == "" {
+	if strings.TrimSpace(start) == "" {
 		return nil, errors.New("start URL is empty")
 	}
 	if !strings.HasPrefix(start, "http://") && !strings.HasPrefix(start, "https://") {
@@ -135,11 +134,9 @@ func Enumerate(ctx context.Context, start string, includeSubDomains bool, opts *
 		if u == nil {
 			return
 		}
-		// Ensure scheme/host exist for normalize
 		if u.Scheme == "" || u.Host == "" {
 			return
 		}
-		// Domain rule
 		if !hostAllowed(u.Hostname(), rootHost, includeSubDomains) {
 			return
 		}
@@ -157,20 +154,25 @@ func Enumerate(ctx context.Context, start string, includeSubDomains bool, opts *
 		mu.Unlock()
 	}
 
-	// Respect ctx cancellation
 	c.OnRequest(func(r *colly.Request) {
+		// Respect ctx cancellation
 		select {
 		case <-ctx.Done():
 			r.Abort()
 			return
 		default:
 		}
-
 		emit(r.URL)
 	})
 
-	// Discover and follow links from common elements
 	c.OnHTML(`a[href], link[href], script[src], iframe[src], form[action]`, func(e *colly.HTMLElement) {
+		// Respect ctx cancellation
+		select {
+		case <-ctx.Done():
+			return
+		default:
+		}
+
 		var raw string
 		switch {
 		case e.Attr("href") != "":
@@ -200,17 +202,12 @@ func Enumerate(ctx context.Context, start string, includeSubDomains bool, opts *
 			return
 		}
 
-		// Emit the discovered URL (optional, but matches your intent of printing uniques)
 		emit(u)
-
-		// Visit it (Colly will handle max depth and duplicates at request-time on our side)
 		_ = c.Visit(u.String())
 	})
 
-	c.OnError(func(r *colly.Response, err error) {
+	c.OnError(func(_ *colly.Response, _ error) {
 		// Keep silent here; caller can log if needed.
-		_ = r
-		_ = err
 	})
 
 	if err := c.Visit(startURL.String()); err != nil {
@@ -219,7 +216,6 @@ func Enumerate(ctx context.Context, start string, includeSubDomains bool, opts *
 
 	c.Wait()
 
-	// If caller cancelled, return ctx error but still include whatever we collected
 	if ctx.Err() != nil {
 		return out, ctx.Err()
 	}

@@ -5,7 +5,11 @@ import (
 	"os"
 	"regexp"
 	"strings"
+	"net/url"
+	"path"
+	
 )
+
 
 func ReadInputFromFile(file string) ([]string, error) {
 
@@ -119,4 +123,40 @@ func isValidSubdomain(domain string) bool {
 		}
 	}
 	return true
+}
+
+
+// =========================
+// 2) Informational URL filter (add this somewhere reusable, e.g. runner/utils)
+// =========================
+
+
+func IsInformationalURL(raw string) bool {
+	u, err := url.Parse(raw)
+	if err != nil || u.Scheme == "" || u.Host == "" {
+		return false
+	}
+
+	ext := strings.ToLower(path.Ext(u.Path))
+
+	// allow “no extension” routes (/login, /api/v1, /)
+	switch ext {
+	case "":
+		return true
+
+	// web pages / scripts
+	case ".js", ".html", ".htm",
+		".php", ".phtml", ".php3", ".php4", ".php5", ".phps",
+		".asp", ".aspx", ".ashx", ".asmx", ".axd",
+		".jsp", ".jspx", ".do", ".action",
+		".mjs",
+
+	// data / text-ish endpoints
+		".json", ".xml", ".txt", ".yaml", ".yml", ".graphql", ".wsdl":
+		return true
+
+	// everything else is not “informational”
+	default:
+		return false
+	}
 }

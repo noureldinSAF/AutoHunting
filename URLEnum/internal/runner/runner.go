@@ -16,7 +16,6 @@ import (
 
 func Run(opts *Options) error {
 	opts.queries = utils.ExtractDomainsFromString(opts.Domain)
-
 	if opts.Domain == "" && opts.Input == "" {
 		logify.Fatalf("No domain or input file specified")
 	}
@@ -95,6 +94,9 @@ func Run(opts *Options) error {
 					cancel()
 
 					if err != nil {
+						if src.Name() == "commoncrawl" {
+							continue
+						}
 						logify.Errorf("[W%02d] Source %s failed for %s: %v", id, src.Name(), q, err)
 						continue
 					}

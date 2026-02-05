@@ -12,19 +12,20 @@ import (
 
 	"github.com/chromedp/cdproto/network"
 	"github.com/chromedp/chromedp"
+	"github.com/cyinnove/logify"
 	"golang.org/x/net/publicsuffix"
 )
 
 type Options struct {
-	Concurrency     int
-	Timeout         time.Duration // per target
-	Wait            time.Duration // after load
-	ChromePath      string
-	Headless        bool
-	NoSandbox       bool
-	DisableGPU      bool
-	DisableDevShm   bool
-	ExtraAllocator  []chromedp.ExecAllocatorOption
+	Concurrency    int
+	Timeout        time.Duration // per target
+	Wait           time.Duration // after load
+	ChromePath     string
+	Headless       bool
+	NoSandbox      bool
+	DisableGPU     bool
+	DisableDevShm  bool
+	ExtraAllocator []chromedp.ExecAllocatorOption
 }
 
 func (o Options) withDefaults() Options {
@@ -40,11 +41,9 @@ func (o Options) withDefaults() Options {
 	if strings.TrimSpace(o.ChromePath) == "" {
 		o.ChromePath = "/usr/bin/google-chrome"
 	}
-	// Default behavior matches original main(): headless true + hardening flags
 	if !o.Headless {
 		o.Headless = true
 	}
-	// Keep these enabled by default (same spirit as original)
 	if !o.NoSandbox {
 		o.NoSandbox = true
 	}
@@ -57,11 +56,9 @@ func (o Options) withDefaults() Options {
 	return o
 }
 
-// Enumerate scans a single start target (host or URL) and returns unique informational URLs.
-// includeSubdomains controls whether we allow URLs from the same registrable domain (eTLD+1).
-// - false: only same hostname as the start URL.
-// - true : any subdomain under the same eTLD+1 as the start URL.
+// Enumerate scans a single start target and returns unique informational URLs.
 func Enumerate(ctx context.Context, start string, includeSubdomains bool, opts Options) ([]string, error) {
+	logify.Infof("Starting headless enumeration for %s (includeSubdomains=%v)", start, includeSubdomains)
 	opts = opts.withDefaults()
 
 	startURL := normalizeTarget(start)
@@ -74,31 +71,26 @@ func Enumerate(ctx context.Context, start string, includeSubdomains bool, opts O
 		return nil, fmt.Errorf("invalid start url: %q", start)
 	}
 
-	var allowFn func(candidate string) bool
+	// domain allow function
+	var allowFn func(string) bool
 	if includeSubdomains {
 		rootETLD1 := etldPlusOne(u0.Hostname())
 		if rootETLD1 == "" {
-			return nil, fmt.Errorf("cannot compute eTLD+1 for start host: %s", u0.Hostname())
+			return nil, fmt.Errorf("cannot compute eTLD+1 for %s", u0.Hostname())
 		}
 		allowFn = func(candidate string) bool {
 			uu, err := url.Parse(candidate)
-			if err != nil || uu.Hostname() == "" {
-				return false
-			}
-			return etldPlusOne(uu.Hostname()) == rootETLD1
+			return err == nil && etldPlusOne(uu.Hostname()) == rootETLD1
 		}
 	} else {
 		rootHost := strings.ToLower(u0.Hostname())
 		allowFn = func(candidate string) bool {
 			uu, err := url.Parse(candidate)
-			if err != nil || uu.Hostname() == "" {
-				return false
-			}
-			return strings.ToLower(uu.Hostname()) == rootHost
+			return err == nil && strings.ToLower(uu.Hostname()) == rootHost
 		}
 	}
 
-	// One Chrome instance (allocator) per Enumerate call
+	// Chrome allocator (one per Enumerate)
 	allocOpts := append(chromedp.DefaultExecAllocatorOptions[:],
 		chromedp.ExecPath(opts.ChromePath),
 		chromedp.Flag("headless", opts.Headless),
@@ -116,7 +108,7 @@ func Enumerate(ctx context.Context, start string, includeSubdomains bool, opts O
 	browserCtx, cancelBrowser := chromedp.NewContext(allocCtx)
 	defer cancelBrowser()
 
-	// Dedupe + collect (like your writer goroutine, but in-memory)
+	// results collector
 	results := make(chan string, 2048)
 	var (
 		mu   sync.Mutex
@@ -128,52 +120,44 @@ func Enumerate(ctx context.Context, start string, includeSubdomains bool, opts O
 	collectorWG.Add(1)
 	go func() {
 		defer collectorWG.Done()
-		for s := range results {
+		for u := range results {
 			mu.Lock()
-			if _, ok := seen[s]; ok {
-				mu.Unlock()
-				continue
+			if _, ok := seen[u]; !ok {
+				seen[u] = struct{}{}
+				out = append(out, u)
 			}
-			seen[s] = struct{}{}
-			out = append(out, s)
 			mu.Unlock()
 		}
 	}()
 
+	// bounded worker pool
 	sem := make(chan struct{}, opts.Concurrency)
 	errCh := make(chan error, 1)
 
-	// This tool version enumerates a single target using concurrency=1 logic,
-	// but keeps the same semaphore pattern so you can extend to multi-target easily.
 	sem <- struct{}{}
-	go func(targetURL string) {
+	go func(target string) {
 		defer func() { <-sem }()
-		err := scanTarget(browserCtx, targetURL, opts.Timeout, opts.Wait, func(raw string) {
+
+		err := scanTarget(browserCtx, target, opts.Timeout, opts.Wait, func(raw string) {
 			u := normalizeCapturedURL(raw)
-			if u == "" {
-				return
-			}
-			if !isInformational(u) {
-				return
-			}
-			if !allowFn(u) {
+			if u == "" || !isInformational(u) || !allowFn(u) {
 				return
 			}
 			select {
 			case results <- u:
 			case <-ctx.Done():
-				return
 			}
 		})
+
 		if err != nil {
 			select {
-			case errCh <- fmt.Errorf("%s -> %w", targetURL, err):
+			case errCh <- err:
 			default:
 			}
 		}
 	}(startURL)
 
-	// Wait for goroutine by filling semaphore completely
+	// wait for workers
 	for i := 0; i < cap(sem); i++ {
 		sem <- struct{}{}
 	}
@@ -183,7 +167,6 @@ func Enumerate(ctx context.Context, start string, includeSubdomains bool, opts O
 
 	select {
 	case e := <-errCh:
-		// Return partial results + error
 		return out, e
 	default:
 	}
@@ -207,14 +190,11 @@ func scanTarget(browserCtx context.Context, targetURL string, perTargetTimeout, 
 		}
 	})
 
-	var hrefsJSON string
-
 	return chromedp.Run(ctx,
 		network.Enable(),
 		chromedp.Navigate(targetURL),
 		chromedp.WaitReady("body", chromedp.ByQuery),
 		chromedp.Sleep(wait),
-		chromedp.Evaluate("`JSON.stringify(Array.from(document.querySelectorAll(\"a[href]\").map(a => a.href)))`", &hrefsJSON),
 	)
 }
 
@@ -248,18 +228,11 @@ func isInformational(raw string) bool {
 	}
 	ext := strings.ToLower(path.Ext(u.Path))
 	switch ext {
-	case "", ".js", ".html",
+	case "", ".js", ".html", ".htm",
 		".php", ".phtml", ".php3", ".php4", ".php5", ".phps",
-		".asp", ".aspx", ".ashx", ".asmx", ".axd",
+		".asp", ".aspx", ".ashx", ".asmx",
 		".jsp", ".jspx", ".do", ".action",
-		".py", ".rb", ".pl", ".cgi",
-		".cfm", ".cfc", ".mjs",
-		".lua",
-		".go",
-		".fcgi", ".ejs", ".erb", ".twig", ".jinja", ".j2",
-		".hbs", ".handlebars", ".mustache",
-		".liquid", ".ftl", ".vm", ".htm",
-		".wasm", ".json", ".xml", ".graphql", ".wsdl", ".yaml", ".yml", ".txt":
+		".mjs", ".json", ".xml", ".graphql", ".wsdl", ".yaml", ".yml", ".txt":
 		return true
 	default:
 		return false
@@ -271,7 +244,6 @@ func etldPlusOne(host string) string {
 	if host == "" {
 		return ""
 	}
-	// Strip port if any
 	if strings.Contains(host, ":") {
 		host = strings.Split(host, ":")[0]
 	}
@@ -281,3 +253,6 @@ func etldPlusOne(host string) string {
 	}
 	return etld1
 }
+// =========================
+// 1) Informational URL filter (moved from runner/testRunner)
+// =========================
