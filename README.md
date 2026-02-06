@@ -104,6 +104,11 @@ commoncrawl doesn't work in codespace, So If you are using the tool in another v
 6- The tool gives you unique results by default
 
 
+# JSAnalyzer 
+```bash
+go run . -i js.txt -o output.json -timeout 600 -c 10 -only secrets
+```
+
 
 
 
