@@ -5,6 +5,8 @@ import (
 	"strings"
 	"sync"
 	"time"
+	"net/url"
+	"path"
 
 	"github.com/cyinnove/logify"
 	"github.com/noureldinSAF/AutoHunting/URLEnum/pkg/active/crawl"
@@ -47,23 +49,36 @@ func Run(opts *Options) error {
 	}
 
 	// Shared results across all workers (dedupe)
-	allResults := make(map[string]bool)
+	allResults := make(map[string]string)
 	var resultsMu sync.Mutex
 
 	addResult := func(u string) {
-		u = strings.TrimSpace(u)
-		if u == "" {
-			return
-		}
-		if !utils.IsInformationalURL(u) {
-			return
-		}
-		resultsMu.Lock()
-		if !allResults[u] {
-			allResults[u] = true
-		}
-		resultsMu.Unlock()
-	}
+    u = strings.TrimSpace(u)
+    if u == "" {
+        return
+    }
+    if !utils.IsInformationalURL(u) {
+        return
+    }
+
+    key := dedupKey(u)
+    if key == "" {
+        return
+    }
+
+    rep := canonicalURL(u)
+    if rep == "" {
+        rep = u
+    }
+
+    resultsMu.Lock()
+    if _, exists := allResults[key]; !exists {
+        // first wins
+        allResults[key] = rep
+    }
+    resultsMu.Unlock()
+}
+
 
 	// =========================
 	// Concurrency split (ONLY LOGIC CHANGE)
@@ -197,9 +212,10 @@ func Run(opts *Options) error {
 
 	// Collect unique URLs after passive stage
 	uniqueURLs := make([]string, 0, len(allResults))
-	for u := range allResults {
-		uniqueURLs = append(uniqueURLs, u)
-	}
+	for _, u := range allResults {
+    uniqueURLs = append(uniqueURLs, u)
+     }
+
 
 	// =========================
 	// Active Enumeration (same flow: crawl then headless)
@@ -260,9 +276,10 @@ func Run(opts *Options) error {
 		// Refresh seeds after crawl added more
 		resultsMu.Lock()
 		uniqueURLs = uniqueURLs[:0]
-		for u := range allResults {
-			uniqueURLs = append(uniqueURLs, u)
-		}
+		for _, u := range allResults {
+          uniqueURLs = append(uniqueURLs, u)
+        }
+
 		resultsMu.Unlock()
 
 		// 2) Headless tool (chromedp)
@@ -320,7 +337,7 @@ func Run(opts *Options) error {
 
 		// Final unique list from map
 		uniqueURLs = make([]string, 0, len(allResults))
-		for u := range allResults {
+		for _, u := range allResults {
 			uniqueURLs = append(uniqueURLs, u)
 		}
 	}
@@ -334,3 +351,67 @@ func Run(opts *Options) error {
 
 	return nil
 }
+
+
+// dedupKey: generic dedupe key that ignores ALL query params and fragments.
+// This ensures URLs that only differ by parameters are treated as duplicates.
+func dedupKey(raw string) string {
+    raw = strings.TrimSpace(raw)
+    if raw == "" {
+        return ""
+    }
+
+    u, err := url.Parse(raw)
+    if err != nil {
+        // fallback if parsing fails
+        return raw
+    }
+
+    u.Fragment = ""
+    u.Host = strings.ToLower(u.Host)
+    u.Scheme = strings.ToLower(u.Scheme)
+
+    p := u.EscapedPath()
+    if p == "" {
+        p = "/"
+    }
+    p = path.Clean(p)
+    if !strings.HasPrefix(p, "/") {
+        p = "/" + p
+    }
+
+    // KEY POINT: ignore query entirely
+    // If you want http/https to be treated the same, remove u.Scheme from the key.
+    return u.Scheme + "://" + u.Host + p
+}
+
+// canonicalURL: returns the URL without query and fragment (safe for crawling/headless).
+func canonicalURL(raw string) string {
+    raw = strings.TrimSpace(raw)
+    if raw == "" {
+        return ""
+    }
+
+    u, err := url.Parse(raw)
+    if err != nil {
+        return raw
+    }
+
+    u.Fragment = ""
+    u.RawQuery = "" // drop all params
+    u.Host = strings.ToLower(u.Host)
+    u.Scheme = strings.ToLower(u.Scheme)
+
+    p := u.EscapedPath()
+    if p == "" {
+        p = "/"
+    }
+    p = path.Clean(p)
+    if !strings.HasPrefix(p, "/") {
+        p = "/" + p
+    }
+    u.Path = p
+
+    return u.String()
+}
+
