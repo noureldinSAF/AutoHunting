@@ -1,0 +1,1406 @@
+[
+  {
+    "url": "http://flagyard.com/ext/jquery/bxGallery/jquery.bxGallery.1.1.min.js"
+  },
+  {
+    "url": "http://flagyard.com/ext/jquery/fancybox/jquery.fancybox-1.3.4.pack.js"
+  },
+  {
+    "url": "http://flagyard.com/ext/jquery/jquery-1.4.2.min.js"
+  },
+  {
+    "url": "http://flagyard.com/ext/jquery/jquery-1.8.0.min.js"
+  },
+  {
+    "url": "http://flagyard.com/ext/jquery/jquery.corner.js"
+  },
+  {
+    "url": "http://flagyard.com/ext/jquery/jquery.equalheights.js"
+  },
+  {
+    "url": "http://flagyard.com/ext/jquery/ui/jquery-ui-1.8.22.min.js"
+  },
+  {
+    "url": "http://flagyard.com/ext/jquery/ui/jquery-ui-1.8.6.min.js"
+  },
+  {
+    "url": "http://flagyard.com/ext/js/Kozuka_Gothic_Pro_OpenType_700.font.js"
+  },
+  {
+    "url": "http://flagyard.com/ext/js/cufon-replace.js"
+  },
+  {
+    "url": "http://flagyard.com/ext/js/cufon-yui.js"
+  },
+  {
+    "url": "http://flagyard.com/ext/js/imagepreloader.js"
+  },
+  {
+    "url": "http://flagyard.com/ext/js/jcarousellite.js"
+  },
+  {
+    "url": "http://flagyard.com/ext/js/js.js"
+  },
+  {
+    "url": "http://flagyard.com/ppntv-gg/images/webgg.js"
+  },
+  {
+    "url": "http://kafd.sa/_next/static/chunks/framework-1751fec5da7e0462.js"
+  },
+  {
+    "url": "http://www.flagyard.com/includes/general.js"
+  },
+  {
+    "url": "https://auth.eam.kafd.sa/login/assets/index-C1ogTJGG.js"
+  },
+  {
+    "url": "https://bugbounty.sa/assets/ArrowForwardIcon-78b25865.js"
+  },
+  {
+    "url": "https://bugbounty.sa/assets/ArrowForwardIcon-9b6a5877.js"
+  },
+  {
+    "url": "https://bugbounty.sa/assets/ArrowForwardIcon-b83f22d2.js"
+  },
+  {
+    "url": "https://bugbounty.sa/assets/BadgeWrapper-41f063e7.js"
+  },
+  {
+    "url": "https://bugbounty.sa/assets/BadgeWrapper-42e28074.js"
+  },
+  {
+    "url": "https://bugbounty.sa/assets/BadgeWrapper-f759a1f5.js"
+  },
+  {
+    "url": "https://bugbounty.sa/assets/FormCountryAutocomplete-a9ef9dea.js"
+  },
+  {
+    "url": "https://bugbounty.sa/assets/FormPasswordField-3418009e.js"
+  },
+  {
+    "url": "https://bugbounty.sa/assets/FormPasswordField-4322f432.js"
+  },
+  {
+    "url": "https://bugbounty.sa/assets/Landing-6e716ff3.js"
+  },
+  {
+    "url": "https://bugbounty.sa/assets/Landing-92c6f250.js"
+  },
+  {
+    "url": "https://bugbounty.sa/assets/Landing-b1496396.js"
+  },
+  {
+    "url": "https://bugbounty.sa/assets/Leaderboard-8375b87d.js"
+  },
+  {
+    "url": "https://bugbounty.sa/assets/LeaderboardList-0dbcca73.js"
+  },
+  {
+    "url": "https://bugbounty.sa/assets/LeaderboardList-0f4adc41.js"
+  },
+  {
+    "url": "https://bugbounty.sa/assets/LeaderboardList-ea23a61b.js"
+  },
+  {
+    "url": "https://bugbounty.sa/assets/LinkedIn-9ccfc3b0.js"
+  },
+  {
+    "url": "https://bugbounty.sa/assets/LinkedIn-a1a17ff9.js"
+  },
+  {
+    "url": "https://bugbounty.sa/assets/LinkedIn-bdf94d92.js"
+  },
+  {
+    "url": "https://bugbounty.sa/assets/Login-395a0789.js"
+  },
+  {
+    "url": "https://bugbounty.sa/assets/Login-40233c7d.js"
+  },
+  {
+    "url": "https://bugbounty.sa/assets/OtpForm-22864df9.js"
+  },
+  {
+    "url": "https://bugbounty.sa/assets/PointsBadge-0f32555e.js"
+  },
+  {
+    "url": "https://bugbounty.sa/assets/PointsBadge-33376529.js"
+  },
+  {
+    "url": "https://bugbounty.sa/assets/PointsBadge-be733241.js"
+  },
+  {
+    "url": "https://bugbounty.sa/assets/Policy-bdbf888e.js"
+  },
+  {
+    "url": "https://bugbounty.sa/assets/RankBadge-41bad512.js"
+  },
+  {
+    "url": "https://bugbounty.sa/assets/RankBadge-472cddca.js"
+  },
+  {
+    "url": "https://bugbounty.sa/assets/RankBadge-bcafda02.js"
+  },
+  {
+    "url": "https://bugbounty.sa/assets/Register-541034f9.js"
+  },
+  {
+    "url": "https://bugbounty.sa/assets/ShieldIcon-a2c395f5.js"
+  },
+  {
+    "url": "https://bugbounty.sa/assets/SparklesFilledIcon-56e26a6c.js"
+  },
+  {
+    "url": "https://bugbounty.sa/assets/SparklesFilledIcon-793543b9.js"
+  },
+  {
+    "url": "https://bugbounty.sa/assets/SparklesFilledIcon-e5c8e277.js"
+  },
+  {
+    "url": "https://bugbounty.sa/assets/SparklesIcon-3cc61c64.js"
+  },
+  {
+    "url": "https://bugbounty.sa/assets/SparklesIcon-c1eb8a94.js"
+  },
+  {
+    "url": "https://bugbounty.sa/assets/SparklesIcon-e4814b0f.js"
+  },
+  {
+    "url": "https://bugbounty.sa/assets/Terms-a7c6e059.js"
+  },
+  {
+    "url": "https://bugbounty.sa/assets/blackhatLogo-3e895c01.js"
+  },
+  {
+    "url": "https://bugbounty.sa/assets/index-0b639e94.js"
+  },
+  {
+    "url": "https://bugbounty.sa/assets/index-372daae5.js"
+  },
+  {
+    "url": "https://bugbounty.sa/assets/index-4b492ad5.js"
+  },
+  {
+    "url": "https://bugbounty.sa/assets/index-5a99a751.js"
+  },
+  {
+    "url": "https://bugbounty.sa/assets/index-dc63a3ba.js"
+  },
+  {
+    "url": "https://bugbounty.sa/assets/index-f7f00666.js"
+  },
+  {
+    "url": "https://bugbounty.sa/assets/libraries/rtl/foundation.js"
+  },
+  {
+    "url": "https://bugbounty.sa/assets/libraries/rtl/jquery.js"
+  },
+  {
+    "url": "https://bugbounty.sa/assets/libraries/rtl/what-input.js"
+  },
+  {
+    "url": "https://bugbounty.sa/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"
+  },
+  {
+    "url": "https://bugbounty.sa/cdn-cgi/scripts/cf.common.js"
+  },
+  {
+    "url": "https://bugbounty.sa/cdn-cgi/scripts/zepto.min.js"
+  },
+  {
+    "url": "https://bugbounty.sa/js/bootstrap.min.js"
+  },
+  {
+    "url": "https://bugbounty.sa/js/dashkit_app.js"
+  },
+  {
+    "url": "https://bugbounty.sa/js/dashkit_app.js?v=1"
+  },
+  {
+    "url": "https://bugbounty.sa/js/jquery.backstretch.js"
+  },
+  {
+    "url": "https://bugbounty.sa/js/jquery.lwtCountdown-1.0.js"
+  },
+  {
+    "url": "https://bugbounty.sa/js/jquery.min.js"
+  },
+  {
+    "url": "https://bugbounty.sa/js/manifest.js"
+  },
+  {
+    "url": "https://bugbounty.sa/js/modernizr-2.6.2.min.js"
+  },
+  {
+    "url": "https://bugbounty.sa/js/time.js"
+  },
+  {
+    "url": "https://bugbounty.sa/js/vendor.js"
+  },
+  {
+    "url": "https://bugbounty.sa/libs/datepicker/datepicker.min.js"
+  },
+  {
+    "url": "https://bugbounty.sa/libs/dropzone/dist/min/dropzone.min.js"
+  },
+  {
+    "url": "https://bugbounty.sa/libs/flatpickr/dist/flatpickr.min.js"
+  },
+  {
+    "url": "https://bugbounty.sa/libs/rtl/foundation.js"
+  },
+  {
+    "url": "https://bugbounty.sa/libs/rtl/jquery.js"
+  },
+  {
+    "url": "https://bugbounty.sa/libs/rtl/what-input.js"
+  },
+  {
+    "url": "https://bugbounty.sa/libs/select2/dist/js/select2.min.js"
+  },
+  {
+    "url": "https://bugbounty.sa/static/js/3.54923f88.chunk.js"
+  },
+  {
+    "url": "https://bugbounty.sa/static/js/3.a2f5bb60.chunk.js"
+  },
+  {
+    "url": "https://bugbounty.sa/static/js/main.153dfe27.js"
+  },
+  {
+    "url": "https://bugbounty.sa/static/js/main.20c642fa.js"
+  },
+  {
+    "url": "https://bugbounty.sa/static/js/main.6a89b969.js"
+  },
+  {
+    "url": "https://bugbounty.sa/static/js/main.80b2cfe0.js"
+  },
+  {
+    "url": "https://bugbounty.sa/static/js/main.d74467f4.js"
+  },
+  {
+    "url": "https://drive.kafd.sa/ui/core/js/2726.1666ee6c.js"
+  },
+  {
+    "url": "https://drive.kafd.sa/ui/core/js/6127.a2394d04.js"
+  },
+  {
+    "url": "https://drive.kafd.sa/ui/core/js/6880.3db13359.js"
+  },
+  {
+    "url": "https://drive.kafd.sa/ui/core/js/9295.36f6bcfa.js"
+  },
+  {
+    "url": "https://drive.kafd.sa/ui/core/js/932.5b505fe8.js"
+  },
+  {
+    "url": "https://drive.kafd.sa/ui/core/js/app.11e9f6be.js"
+  },
+  {
+    "url": "https://drive.kafd.sa/ui/core/js/chunk-vendors.852d36c6.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/AnimateOnScroll-Dwb7dOyl.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/AvatarWithBadge-CR_LI86l.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/Card-DOuMEqSH.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/CardContent-3l5srOMo.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/CardMedia-BN0O01_Y.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/CheckCircleOutline-BWLBUcWR.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/ChoosePlan-D3Bnlsqk.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/CurrentEventCard-CP-fir_P.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/EventSummary-DM5_RuzL.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/FlagContainer-3PRHR3dY.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/Footer-ByDRscGn.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/FormTextField-R2RHRm4Y.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/Global-yWUWxf02.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/Hero-CMTbyMtp.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/HitbVisitors-CwKcfjQs.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/Hitbctf-DiEspqyF.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/Join-D2mYtu4E.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/Landing-DAB3KGps.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/LoadingButton-CrGiJs3n.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/Login-DHKPeqAp.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/MainLayout-BLBKvXNl.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/NoMatch-I11qu40v.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/Page-BZwXBNiP.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/PrivateLayout-CCukecl1.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/Profile-CW7tysGM.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/PublicLayout-qBLGOczQ.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/PublicViewEvent-CCy-Ca4e.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/RecaptchaNotice-CDV7meD-.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/Register-DJtaHoKc.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/StatusBadge-CyOosYcG.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/SubscriptionPlans-BB5xPo0c.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/Tabs-Bt2N1ciX.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/UserHeader-Cw7xLtGq.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/What-D7R3ec6n.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/Who-B5Wsvt2i.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/Why-CfGVfMyp.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/getPlanFeatures-B4ZIMxFu.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/index-BeIfxPXd.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/index-C7OejvAL.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/index-CDy1nhmU.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/index-CMR5SLt2.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/index-CMvCMZvv.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/index-CWmvAxp2.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/index-CqJXaAU5.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/index-Dm9K5SZ2.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/index-dn_Uzzrf.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/index-roRooa7g.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/modalKeys-CbV-dvKd.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/polyfill-force-Ccj07gXN.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/polyfill-force-DotJlDeL.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/sendVerificationEmail-Bor5UTfw.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/socketEvents-C4PXYrnS.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/transformEventDetails-w-KA3geR.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/tslib.es6-NPRqQeXK.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/useChallengeCategories-CkWmsSvO.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/useCountDown-C51EgMgO.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/useDate-DJ7cYMH5.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/useEventDetails-DhITEMXC.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/useFastForm-DqBx-pLU.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/usePlanFeatures-B-FVfHR_.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/usePlans-BEXFEymw.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/useRecaptcha-DhSUQM7X.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/useSnackbar-DIUzUkIw.js"
+  },
+  {
+    "url": "https://flagyard.com/assets/useUserProfile-Dszeo8tw.js"
+  },
+  {
+    "url": "https://flagyard.com/ext/jquery/bxGallery/jquery.bxGallery.1.1.min.js"
+  },
+  {
+    "url": "https://flagyard.com/ext/jquery/jquery-1.4.2.min.js"
+  },
+  {
+    "url": "https://flagyard.com/ext/jquery/jquery-1.8.0.min.js"
+  },
+  {
+    "url": "https://flagyard.com/ext/jquery/jquery.corner.js"
+  },
+  {
+    "url": "https://flagyard.com/ext/jquery/jquery.equalheights.js"
+  },
+  {
+    "url": "https://flagyard.com/ext/jquery/ui/jquery-ui-1.8.6.min.js"
+  },
+  {
+    "url": "https://flagyard.com/ext/js/Kozuka_Gothic_Pro_OpenType_700.font.js"
+  },
+  {
+    "url": "https://flagyard.com/ext/js/cufon-yui.js"
+  },
+  {
+    "url": "https://flagyard.com/ext/js/imagepreloader.js"
+  },
+  {
+    "url": "https://flagyard.com/ext/js/jcarousellite.js"
+  },
+  {
+    "url": "https://flagyard.com/ext/js/js.js"
+  },
+  {
+    "url": "https://flagyard.com/includes/general.js"
+  },
+  {
+    "url": "https://flagyard.com/ppntv-gg/images/webgg.js"
+  },
+  {
+    "url": "https://flagyard.com/static/js/1274.38db5505.chunk.js"
+  },
+  {
+    "url": "https://flagyard.com/static/js/1356.38852e12.chunk.js"
+  },
+  {
+    "url": "https://flagyard.com/static/js/1442.4af6a24f.chunk.js"
+  },
+  {
+    "url": "https://flagyard.com/static/js/2103.26a5863d.chunk.js"
+  },
+  {
+    "url": "https://flagyard.com/static/js/2103.e879f6d1.chunk.js"
+  },
+  {
+    "url": "https://flagyard.com/static/js/3204.1af71d77.chunk.js"
+  },
+  {
+    "url": "https://flagyard.com/static/js/3786.15210b96.chunk.js"
+  },
+  {
+    "url": "https://flagyard.com/static/js/3825.f83edd10.chunk.js"
+  },
+  {
+    "url": "https://flagyard.com/static/js/4250.7a23b1b1.chunk.js"
+  },
+  {
+    "url": "https://flagyard.com/static/js/4341.8eda102d.chunk.js"
+  },
+  {
+    "url": "https://flagyard.com/static/js/5162.0dd22020.chunk.js"
+  },
+  {
+    "url": "https://flagyard.com/static/js/5162.46e64dbb.chunk.js"
+  },
+  {
+    "url": "https://flagyard.com/static/js/5983.06056546.chunk.js"
+  },
+  {
+    "url": "https://flagyard.com/static/js/5983.239f0967.chunk.js"
+  },
+  {
+    "url": "https://flagyard.com/static/js/5983.2ab87834.chunk.js"
+  },
+  {
+    "url": "https://flagyard.com/static/js/6039.0679d915.chunk.js"
+  },
+  {
+    "url": "https://flagyard.com/static/js/6326.e42d8a4e.chunk.js"
+  },
+  {
+    "url": "https://flagyard.com/static/js/6601.273c934d.chunk.js"
+  },
+  {
+    "url": "https://flagyard.com/static/js/6601.ebe4c7eb.chunk.js"
+  },
+  {
+    "url": "https://flagyard.com/static/js/7780.07c4e99a.chunk.js"
+  },
+  {
+    "url": "https://flagyard.com/static/js/807.840634a2.chunk.js"
+  },
+  {
+    "url": "https://flagyard.com/static/js/8071.6a35d4ca.chunk.js"
+  },
+  {
+    "url": "https://flagyard.com/static/js/856.57a98b53.chunk.js"
+  },
+  {
+    "url": "https://flagyard.com/static/js/8749.158f830d.chunk.js"
+  },
+  {
+    "url": "https://flagyard.com/static/js/8801.86633afa.chunk.js"
+  },
+  {
+    "url": "https://flagyard.com/static/js/8828.0e6a0fea.chunk.js"
+  },
+  {
+    "url": "https://flagyard.com/static/js/8828.ccd0975d.chunk.js"
+  },
+  {
+    "url": "https://flagyard.com/static/js/9057.49ba393f.chunk.js"
+  },
+  {
+    "url": "https://flagyard.com/static/js/933.ec16453a.chunk.js"
+  },
+  {
+    "url": "https://flagyard.com/static/js/main.0171dad0.js"
+  },
+  {
+    "url": "https://flagyard.com/static/js/main.0387d2db.js"
+  },
+  {
+    "url": "https://flagyard.com/static/js/main.366bc22c.js"
+  },
+  {
+    "url": "https://flagyard.com/static/js/main.3c2144a7.js"
+  },
+  {
+    "url": "https://flagyard.com/static/js/main.45110fda.js"
+  },
+  {
+    "url": "https://flagyard.com/static/js/main.4d571a06.js"
+  },
+  {
+    "url": "https://flagyard.com/static/js/main.5d22f812.js"
+  },
+  {
+    "url": "https://flagyard.com/static/js/main.642e99c5.js"
+  },
+  {
+    "url": "https://flagyard.com/static/js/main.d1dd8799.js"
+  },
+  {
+    "url": "https://isupapp02.kafd.sa/OA_HTML/AppsLocalLogin.jsp?login.js"
+  },
+  {
+    "url": "https://isupapp02.kafd.sa/OA_HTML/cabo/jsLibs/Common12_2_7_0_0.js"
+  },
+  {
+    "url": "https://isupapp02.kafd.sa/OA_HTML/cabo/oajsLibs/FNDWFWorklistService.js"
+  },
+  {
+    "url": "https://isupapp02.kafd.sa/OA_HTML/cabo/oajsLibs/OAFSlideoutMenu.js"
+  },
+  {
+    "url": "https://isupapp02.kafd.sa/OA_HTML/cabo/oajsLibs/lookAheadLOV.js"
+  },
+  {
+    "url": "https://isupapp02.kafd.sa/OA_HTML/cabo/oajsLibs/multiTab.js"
+  },
+  {
+    "url": "https://isupapp02.kafd.sa/OA_HTML/cabo/oajsLibs/oaGestureHandler.js"
+  },
+  {
+    "url": "https://isupapp02.kafd.sa/OA_HTML/cabo/oajsLibs/oaGestureLib.js"
+  },
+  {
+    "url": "https://isupapp02.kafd.sa/OA_HTML/cabo/oajsLibs/oafb.js"
+  },
+  {
+    "url": "https://isupapp02.kafd.sa/OA_HTML/cabo/oajsLibs/oafcoreR122.js"
+  },
+  {
+    "url": "https://isupapp02.kafd.sa/OA_HTML/cabo/oajsLibs/popup.js"
+  },
+  {
+    "url": "https://kafd.sa/_next/static/aE0WTgUmHcNIml9ZhY7LR/_buildManifest.js"
+  },
+  {
+    "url": "https://kafd.sa/_next/static/aE0WTgUmHcNIml9ZhY7LR/_ssgManifest.js"
+  },
+  {
+    "url": "https://kafd.sa/_next/static/chunks/framework-1751fec5da7e0462.js"
+  },
+  {
+    "url": "https://kafd.sa/_next/static/chunks/framework-45714ceb67b9f27a.js"
+  },
+  {
+    "url": "https://kafd.sa/_next/static/chunks/main-5eae6ac538dc3cde.js"
+  },
+  {
+    "url": "https://kafd.sa/_next/static/chunks/pages/%5B...slug%5D-cce513801871a8dc.js"
+  },
+  {
+    "url": "https://kafd.sa/_next/static/chunks/pages/404-4677601b48a46810.js"
+  },
+  {
+    "url": "https://kafd.sa/_next/static/chunks/pages/[...slug]-cce513801871a8dc.js"
+  },
+  {
+    "url": "https://kafd.sa/_next/static/chunks/pages/_app-1825dd672c9260b7.js",
+    "secrets": {
+      "Google API Key::AIzaSyBL8Bu9yrOePtC4vXij1ralLK6N2ZA25Kk": {}
+    },
+    "secret_matches": [
+      {
+        "pattern": "Google API Key",
+        "value": "AIzaSyBL8Bu9yrOePtC4vXij1ralLK6N2ZA25Kk"
+      }
+    ]
+  },
+  {
+    "url": "https://kafd.sa/_next/static/chunks/polyfills-42372ed130431b0a.js"
+  },
+  {
+    "url": "https://kafd.sa/_next/static/chunks/webpack-7a6a85f1bca2e2bb.js"
+  },
+  {
+    "url": "https://opti.kafd.sa/admin.js"
+  },
+  {
+    "url": "https://portal.kafd.sa/_next/static/chunks/1026-e751f43526a4ed0e.js"
+  },
+  {
+    "url": "https://portal.kafd.sa/_next/static/chunks/1060-7734770c6cdbd921.js"
+  },
+  {
+    "url": "https://portal.kafd.sa/_next/static/chunks/1733-148d60117266f36e.js"
+  },
+  {
+    "url": "https://portal.kafd.sa/_next/static/chunks/1785-d84222daae929d05.js"
+  },
+  {
+    "url": "https://portal.kafd.sa/_next/static/chunks/1858-fe06a3d26942bd3c.js"
+  },
+  {
+    "url": "https://portal.kafd.sa/_next/static/chunks/2117-3c26dd83e4954579.js"
+  },
+  {
+    "url": "https://portal.kafd.sa/_next/static/chunks/2117-9265e3c48da56fa7.js"
+  },
+  {
+    "url": "https://portal.kafd.sa/_next/static/chunks/2586-be2c99fe1f51d601.js"
+  },
+  {
+    "url": "https://portal.kafd.sa/_next/static/chunks/3000-9a0f1df63715554d.js"
+  },
+  {
+    "url": "https://portal.kafd.sa/_next/static/chunks/3145-2d3ed8fb5c18dd66.js"
+  },
+  {
+    "url": "https://portal.kafd.sa/_next/static/chunks/3173-70078033e431ea44.js"
+  },
+  {
+    "url": "https://portal.kafd.sa/_next/static/chunks/3217-b76fb4b0942e1e21.js"
+  },
+  {
+    "url": "https://portal.kafd.sa/_next/static/chunks/3447-e9f997417c60dbb0.js"
+  },
+  {
+    "url": "https://portal.kafd.sa/_next/static/chunks/3458-fb74057deb0a3d6c.js"
+  },
+  {
+    "url": "https://portal.kafd.sa/_next/static/chunks/3487-86d2661064a0a099.js"
+  },
+  {
+    "url": "https://portal.kafd.sa/_next/static/chunks/4184-c2f9dfa3be050fb7.js"
+  },
+  {
+    "url": "https://portal.kafd.sa/_next/static/chunks/4438-3d30af4952a1e157.js"
+  },
+  {
+    "url": "https://portal.kafd.sa/_next/static/chunks/4438-84f5bde2c54f1a7c.js"
+  },
+  {
+    "url": "https://portal.kafd.sa/_next/static/chunks/4719-b05af6745cd20cf6.js"
+  },
+  {
+    "url": "https://portal.kafd.sa/_next/static/chunks/6137-041c6b7c802ee6fe.js"
+  },
+  {
+    "url": "https://portal.kafd.sa/_next/static/chunks/6137-eaf7b6db0f76248f.js"
+  },
+  {
+    "url": "https://portal.kafd.sa/_next/static/chunks/6225-43b04980e16f7077.js"
+  },
+  {
+    "url": "https://portal.kafd.sa/_next/static/chunks/6873-9f261111c9ffd31d.js"
+  },
+  {
+    "url": "https://portal.kafd.sa/_next/static/chunks/7074-d613fa1a64d51754.js"
+  },
+  {
+    "url": "https://portal.kafd.sa/_next/static/chunks/7493-35be3b8369dead32.js"
+  },
+  {
+    "url": "https://portal.kafd.sa/_next/static/chunks/7619-680646b00f744db6.js"
+  },
+  {
+    "url": "https://portal.kafd.sa/_next/static/chunks/8728-bdbc0bbfe863a489.js"
+  },
+  {
+    "url": "https://portal.kafd.sa/_next/static/chunks/9079-980e37bbedfbe641.js"
+  },
+  {
+    "url": "https://portal.kafd.sa/_next/static/chunks/9324-ed9acf3e48670fd9.js"
+  },
+  {
+    "url": "https://portal.kafd.sa/_next/static/chunks/9418-8ae1409a12b14b74.js"
+  },
+  {
+    "url": "https://portal.kafd.sa/_next/static/chunks/9763-f2cc401fde03d148.js"
+  },
+  {
+    "url": "https://portal.kafd.sa/_next/static/chunks/9915-f04242ac9e3b6849.js"
+  },
+  {
+    "url": "https://portal.kafd.sa/_next/static/chunks/app/%5Blocale%5D/(auth)/forget-password/page-5bdfd4e9f31deca7.js"
+  },
+  {
+    "url": "https://portal.kafd.sa/_next/static/chunks/app/%5Blocale%5D/(auth)/layout-a0fef1dd63d6f8b7.js"
+  },
+  {
+    "url": "https://portal.kafd.sa/_next/static/chunks/app/%5Blocale%5D/(auth)/layout-eeb2faa36e6d4a38.js"
+  },
+  {
+    "url": "https://portal.kafd.sa/_next/static/chunks/app/%5Blocale%5D/(auth)/login/page-13e9297dcaac91ee.js"
+  },
+  {
+    "url": "https://portal.kafd.sa/_next/static/chunks/app/%5Blocale%5D/(auth)/login/page-144c21f661568785.js"
+  },
+  {
+    "url": "https://portal.kafd.sa/_next/static/chunks/app/%5Blocale%5D/layout-02edd4cd6f758c15.js"
+  },
+  {
+    "url": "https://portal.kafd.sa/_next/static/chunks/app/[locale]/(auth)/forget-password/page-5bdfd4e9f31deca7.js"
+  },
+  {
+    "url": "https://portal.kafd.sa/_next/static/chunks/app/[locale]/(auth)/layout-a0fef1dd63d6f8b7.js"
+  },
+  {
+    "url": "https://portal.kafd.sa/_next/static/chunks/app/[locale]/(auth)/layout-eeb2faa36e6d4a38.js"
+  },
+  {
+    "url": "https://portal.kafd.sa/_next/static/chunks/app/[locale]/(auth)/login/page-13e9297dcaac91ee.js"
+  },
+  {
+    "url": "https://portal.kafd.sa/_next/static/chunks/app/[locale]/(auth)/login/page-144c21f661568785.js"
+  },
+  {
+    "url": "https://portal.kafd.sa/_next/static/chunks/app/[locale]/layout-02edd4cd6f758c15.js"
+  },
+  {
+    "url": "https://portal.kafd.sa/_next/static/chunks/app/layout-182fbcba19e7daf2.js"
+  },
+  {
+    "url": "https://portal.kafd.sa/_next/static/chunks/app/layout-b5eecb6e7a6db16b.js"
+  },
+  {
+    "url": "https://portal.kafd.sa/_next/static/chunks/fd9d1056-29a9d49593613712.js"
+  },
+  {
+    "url": "https://portal.kafd.sa/_next/static/chunks/main-app-7953154b48acfc86.js"
+  },
+  {
+    "url": "https://portal.kafd.sa/_next/static/chunks/main-app-efb05939bd6c61e7.js"
+  },
+  {
+    "url": "https://portal.kafd.sa/_next/static/chunks/polyfills-42372ed130431b0a.js"
+  },
+  {
+    "url": "https://portal.kafd.sa/_next/static/chunks/webpack-57fbdf2dfa487a61.js"
+  },
+  {
+    "url": "https://portal.kafd.sa/_next/static/chunks/webpack-632245643389f9d9.js"
+  },
+  {
+    "url": "https://residences.kafd.sa/wp-includes/js/jquery/jquery.js"
+  },
+  {
+    "url": "https://submissions.flagyard.com/js/filament-daterangepicker-filter/filament-daterangepicker-filter2.8.0.0.js?v=3.2.110.0"
+  },
+  {
+    "url": "https://submissions.flagyard.com/js/filament/filament/app.js?v=3.2.110.0"
+  },
+  {
+    "url": "https://submissions.flagyard.com/js/filament/filament/echo.js?v=3.2.110.0"
+  },
+  {
+    "url": "https://submissions.flagyard.com/js/filament/notifications/notifications.js?v=3.2.110.0"
+  },
+  {
+    "url": "https://submissions.flagyard.com/js/filament/support/async-alpine.js?v=3.2.110.0"
+  },
+  {
+    "url": "https://submissions.flagyard.com/js/filament/support/support.js?v=3.2.110.0"
+  },
+  {
+    "url": "https://submissions.flagyard.com/livewire/livewire.min.js?id=cc800bf4"
+  },
+  {
+    "url": "https://uat-portal.kafd.sa/_next/static/chunks/1026-8bccf4c7f0682100.js"
+  },
+  {
+    "url": "https://uat-portal.kafd.sa/_next/static/chunks/1858-1dae8bc76096759b.js"
+  },
+  {
+    "url": "https://uat-portal.kafd.sa/_next/static/chunks/2117-9265e3c48da56fa7.js"
+  },
+  {
+    "url": "https://uat-portal.kafd.sa/_next/static/chunks/2586-be2c99fe1f51d601.js"
+  },
+  {
+    "url": "https://uat-portal.kafd.sa/_next/static/chunks/3145-2d3ed8fb5c18dd66.js"
+  },
+  {
+    "url": "https://uat-portal.kafd.sa/_next/static/chunks/4090-9ef11def8d714327.js"
+  },
+  {
+    "url": "https://uat-portal.kafd.sa/_next/static/chunks/4184-c2f9dfa3be050fb7.js"
+  },
+  {
+    "url": "https://uat-portal.kafd.sa/_next/static/chunks/4438-3d30af4952a1e157.js"
+  },
+  {
+    "url": "https://uat-portal.kafd.sa/_next/static/chunks/4719-b05af6745cd20cf6.js"
+  },
+  {
+    "url": "https://uat-portal.kafd.sa/_next/static/chunks/5149-72179e51996138bc.js"
+  },
+  {
+    "url": "https://uat-portal.kafd.sa/_next/static/chunks/5414-766a706f98158c74.js"
+  },
+  {
+    "url": "https://uat-portal.kafd.sa/_next/static/chunks/6137-041c6b7c802ee6fe.js"
+  },
+  {
+    "url": "https://uat-portal.kafd.sa/_next/static/chunks/6873-9f261111c9ffd31d.js"
+  },
+  {
+    "url": "https://uat-portal.kafd.sa/_next/static/chunks/6875-8f28ed975adb9e62.js"
+  },
+  {
+    "url": "https://uat-portal.kafd.sa/_next/static/chunks/8835-5a42065e0518d61a.js"
+  },
+  {
+    "url": "https://uat-portal.kafd.sa/_next/static/chunks/9324-ed9acf3e48670fd9.js"
+  },
+  {
+    "url": "https://uat-portal.kafd.sa/_next/static/chunks/9345-bc7fb5bd122bdc32.js"
+  },
+  {
+    "url": "https://uat-portal.kafd.sa/_next/static/chunks/9418-8ae1409a12b14b74.js"
+  },
+  {
+    "url": "https://uat-portal.kafd.sa/_next/static/chunks/9915-f04242ac9e3b6849.js"
+  },
+  {
+    "url": "https://uat-portal.kafd.sa/_next/static/chunks/app/%5Blocale%5D/(auth)/layout-f8402ddf3e0b4411.js"
+  },
+  {
+    "url": "https://uat-portal.kafd.sa/_next/static/chunks/app/%5Blocale%5D/(auth)/login/page-74aef534c812c016.js"
+  },
+  {
+    "url": "https://uat-portal.kafd.sa/_next/static/chunks/app/[locale]/(auth)/layout-f8402ddf3e0b4411.js"
+  },
+  {
+    "url": "https://uat-portal.kafd.sa/_next/static/chunks/app/[locale]/(auth)/login/page-74aef534c812c016.js"
+  },
+  {
+    "url": "https://uat-portal.kafd.sa/_next/static/chunks/app/layout-310e9731410c0dad.js"
+  },
+  {
+    "url": "https://uat-portal.kafd.sa/_next/static/chunks/fd9d1056-29a9d49593613712.js"
+  },
+  {
+    "url": "https://uat-portal.kafd.sa/_next/static/chunks/main-app-845f4bc32eaf3066.js"
+  },
+  {
+    "url": "https://uat-portal.kafd.sa/_next/static/chunks/polyfills-42372ed130431b0a.js"
+  },
+  {
+    "url": "https://uat-portal.kafd.sa/_next/static/chunks/webpack-cc06bef16c55c0b1.js"
+  },
+  {
+    "url": "https://uat.kafd.sa/_next/static/chunks/framework-45714ceb67b9f27a.js"
+  },
+  {
+    "url": "https://uat.kafd.sa/_next/static/chunks/main-5eae6ac538dc3cde.js"
+  },
+  {
+    "url": "https://uat.kafd.sa/_next/static/chunks/pages/%5B...slug%5D-4c14142711cb6695.js"
+  },
+  {
+    "url": "https://uat.kafd.sa/_next/static/chunks/pages/[...slug]-4c14142711cb6695.js"
+  },
+  {
+    "url": "https://uat.kafd.sa/_next/static/chunks/pages/_app-ecad36746df7d946.js",
+    "secrets": {
+      "Google API Key::AIzaSyBtccUjr1zZFumWF74gdp82Bs2hggJGffo": {}
+    },
+    "secret_matches": [
+      {
+        "pattern": "Google API Key",
+        "value": "AIzaSyBtccUjr1zZFumWF74gdp82Bs2hggJGffo"
+      }
+    ]
+  },
+  {
+    "url": "https://uat.kafd.sa/_next/static/chunks/polyfills-42372ed130431b0a.js"
+  },
+  {
+    "url": "https://uat.kafd.sa/_next/static/chunks/webpack-7a6a85f1bca2e2bb.js"
+  },
+  {
+    "url": "https://uat.kafd.sa/_next/static/eIg1kELPCk7W0NLb1_jVl/_buildManifest.js"
+  },
+  {
+    "url": "https://uat.kafd.sa/_next/static/eIg1kELPCk7W0NLb1_jVl/_ssgManifest.js"
+  },
+  {
+    "url": "https://uat.opti.kafd.sa/admin.js"
+  },
+  {
+    "url": "https://visitor-hq.kafd.sa/dashboard/assets/index-18d3fbe9.js"
+  },
+  {
+    "url": "https://visitor-hq.kafd.sa/dashboard/assets/index-b297e6e2.js"
+  },
+  {
+    "url": "https://visitor-hq.kafd.sa/dashboard/config.js"
+  },
+  {
+    "url": "https://www.bugbounty.sa/assets/index-38a011e2.js"
+  },
+  {
+    "url": "https://www.bugbounty.sa/assets/index-4b492ad5.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/61SNzRWt1mldG1rD6wvzV/_buildManifest.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/61SNzRWt1mldG1rD6wvzV/_ssgManifest.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/B0uf8cR0cvHFfoi35ESCg/_buildManifest.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/B0uf8cR0cvHFfoi35ESCg/_ssgManifest.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/B0uf8cR0cvHFfoi35ESCg/static/chunks/pages/404-4677601b48a46810.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/B0uf8cR0cvHFfoi35ESCg/static/chunks/pages/_error-83215a91f5496fcb.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/B0uf8cR0cvHFfoi35ESCg/static/chunks/pages/index-ddb0d3f348f3a16e.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/HemmIic68SdRYkscY7wTd/_buildManifest.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/HemmIic68SdRYkscY7wTd/_ssgManifest.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/JQlWETwLdMhps1WLSgsf4/_buildManifest.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/JQlWETwLdMhps1WLSgsf4/_ssgManifest.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/KBlr6F9gIyQIkOU8gYLiW/_buildManifest.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/KBlr6F9gIyQIkOU8gYLiW/_ssgManifest.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/KSH2NDpVhlWkVHxuW1Y5V/_buildManifest.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/KSH2NDpVhlWkVHxuW1Y5V/_ssgManifest.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/MFSMoZ04zVcF6R4njMk_y/_buildManifest.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/MFSMoZ04zVcF6R4njMk_y/_ssgManifest.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/MFSMoZ04zVcF6R4njMk_y/static/chunks/pages/404-4677601b48a46810.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/MFSMoZ04zVcF6R4njMk_y/static/chunks/pages/_error-83215a91f5496fcb.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/MFSMoZ04zVcF6R4njMk_y/static/chunks/pages/index-ddb0d3f348f3a16e.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/Xe4teZkPTYLtx-Efz41Od/_buildManifest.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/Xe4teZkPTYLtx-Efz41Od/_ssgManifest.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/_UtV_4jXpWi5OSGJZWQHS/_buildManifest.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/_UtV_4jXpWi5OSGJZWQHS/_ssgManifest.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/aE0WTgUmHcNIml9ZhY7LR/_buildManifest.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/aE0WTgUmHcNIml9ZhY7LR/_ssgManifest.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/chunks/framework-45714ceb67b9f27a.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/chunks/main-54e68a6f5aa74da6.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/chunks/main-5eae6ac538dc3cde.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/chunks/main-66c2e439ba945259.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/chunks/next.config.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/chunks/pages/%5B...slug%5D-a5274a30f50a2043.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/chunks/pages/%5B...slug%5D-b756c850638f617b.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/chunks/pages/%5B...slug%5D-cba8a55d23e8c12a.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/chunks/pages/%5B...slug%5D-cce513801871a8dc.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/chunks/pages/404-4677601b48a46810.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/chunks/pages/[...slug]-a5274a30f50a2043.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/chunks/pages/[...slug]-b756c850638f617b.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/chunks/pages/[...slug]-cba8a55d23e8c12a.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/chunks/pages/[...slug]-cce513801871a8dc.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/chunks/pages/_app-137bb432f6235b17.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/chunks/pages/_app-1825dd672c9260b7.js",
+    "secrets": {
+      "Google API Key::AIzaSyBL8Bu9yrOePtC4vXij1ralLK6N2ZA25Kk": {}
+    },
+    "secret_matches": [
+      {
+        "pattern": "Google API Key",
+        "value": "AIzaSyBL8Bu9yrOePtC4vXij1ralLK6N2ZA25Kk"
+      }
+    ]
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/chunks/pages/_app-45248fb3845d050a.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/chunks/pages/_app-6d3751ad087ec1c2.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/chunks/pages/_app-83d82f9b1f586f8f.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/chunks/pages/_app-97ef7018d751b2aa.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/chunks/pages/_app-c0fdfe5950f8b9cf.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/chunks/pages/_app-d647237f88186774.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/chunks/pages/_app-d76f46e19ffc25f7.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/chunks/pages/_app-e15016054866e69e.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/chunks/pages/_app-e906e480d975b868.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/chunks/polyfills-42372ed130431b0a.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/chunks/polyfills-78c92fac7aa8fdd8.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/chunks/webpack-59c5c889f52620d6.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/chunks/webpack-7a6a85f1bca2e2bb.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/chunks/webpack-97a5e64d5f17ccff.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/g-VbREls7h_GRkcXGo4vi/_buildManifest.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/g-VbREls7h_GRkcXGo4vi/_ssgManifest.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/g-VbREls7h_GRkcXGo4vi/static/chunks/pages/_error-ea8d673f077075f8.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/xwnODfmWGBKsNQ3nnZLBT/_buildManifest.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/xwnODfmWGBKsNQ3nnZLBT/_ssgManifest.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/zszdSVl2BOv0PM3_ZdCv4/_buildManifest.js"
+  },
+  {
+    "url": "https://www.kafd.sa/_next/static/zszdSVl2BOv0PM3_ZdCv4/_ssgManifest.js"
+  },
+  {
+    "url": "https://www.kafd.sa/assets/kafd/js/1198.js"
+  },
+  {
+    "url": "https://www.kafd.sa/assets/kafd/js/1595.js"
+  },
+  {
+    "url": "https://www.kafd.sa/assets/kafd/js/3233.js"
+  },
+  {
+    "url": "https://www.kafd.sa/assets/kafd/js/3600.3fa04507cfe6bc9b0e37.js"
+  },
+  {
+    "url": "https://www.kafd.sa/assets/kafd/js/3600.js"
+  },
+  {
+    "url": "https://www.kafd.sa/assets/kafd/js/3973.cdc4e37338d5907b81d3.js"
+  },
+  {
+    "url": "https://www.kafd.sa/assets/kafd/js/9154.js"
+  },
+  {
+    "url": "https://www.kafd.sa/assets/kafd/js/cookieBanner.9c46dd2b37a09d1a2cb4.js"
+  },
+  {
+    "url": "https://www.kafd.sa/assets/kafd/js/cookieBanner.js"
+  },
+  {
+    "url": "https://www.kafd.sa/assets/kafd/js/desktopMenu.f747f2e847c9518a874f.js"
+  },
+  {
+    "url": "https://www.kafd.sa/assets/kafd/js/desktopMenu.js"
+  },
+  {
+    "url": "https://www.kafd.sa/assets/kafd/js/embeddedVideo.js"
+  },
+  {
+    "url": "https://www.kafd.sa/assets/kafd/js/expanding-cards.js"
+  },
+  {
+    "url": "https://www.kafd.sa/assets/kafd/js/footer.49ef45fe04e882d5a061.js"
+  },
+  {
+    "url": "https://www.kafd.sa/assets/kafd/js/footer.js"
+  },
+  {
+    "url": "https://www.kafd.sa/assets/kafd/js/main.js"
+  },
+  {
+    "url": "https://www.kafd.sa/assets/kafd/js/main.js?v=2.3"
+  },
+  {
+    "url": "https://www.kafd.sa/assets/kafd/js/main.js?v=2.4"
+  },
+  {
+    "url": "https://www.kafd.sa/assets/kafd/js/main.js?v=2.54"
+  },
+  {
+    "url": "https://www.kafd.sa/assets/kafd/js/main.js?v=2.60"
+  },
+  {
+    "url": "https://www.kafd.sa/assets/kafd/js/main.js?v=2.70"
+  },
+  {
+    "url": "https://www.kafd.sa/assets/kafd/js/main.js?v=2.73"
+  },
+  {
+    "url": "https://www.kafd.sa/assets/kafd/js/main.js?v=2.74"
+  },
+  {
+    "url": "https://www.kafd.sa/assets/kafd/js/main.js?v=2.75"
+  },
+  {
+    "url": "https://www.kafd.sa/assets/kafd/js/mobileMenu.35410bb28ea8095eb35e.js"
+  },
+  {
+    "url": "https://www.kafd.sa/assets/kafd/js/mobileMenu.js"
+  },
+  {
+    "url": "https://www.kafd.sa/assets/kafd/js/navigationColorMode.1df16dd7593a9d993ec6.js"
+  },
+  {
+    "url": "https://www.kafd.sa/assets/kafd/js/navigationColorMode.js"
+  },
+  {
+    "url": "https://www.kafd.sa/assets/kafd/js/pageTabs.js"
+  },
+  {
+    "url": "https://www.kafd.sa/assets/kafd/js/siteSearch.d3d08adc688b42f38f0a.js"
+  },
+  {
+    "url": "https://www.kafd.sa/assets/kafd/js/siteSearch.js"
+  },
+  {
+    "url": "https://www.kafd.sa/assets/kafd/js/topNav.3986854a28039a3fa0f2.js"
+  },
+  {
+    "url": "https://www.kafd.sa/assets/kafd/js/topNav.js"
+  },
+  {
+    "url": "https://www.kafd.sa/assets/kafd/js/upcomingCarousel.js"
+  },
+  {
+    "url": "https://www.kafd.sa/assets/kafd/js/vendors~main.js"
+  },
+  {
+    "url": "https://www.kafd.sa/assets/kafd/js/vendors~main.js?v=2.3"
+  },
+  {
+    "url": "https://www.kafd.sa/assets/kafd/js/vendors~main.js?v=2.4"
+  },
+  {
+    "url": "https://www.kafd.sa/assets/kafd/js/videoPlayer.724919a3788eeeeb172a.js"
+  },
+  {
+    "url": "https://www.kafd.sa/assets/kafd/js/videoPlayer.js"
+  },
+  {
+    "url": "https://www.kafd.sa/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"
+  },
+  {
+    "url": "https://www.kafd.sa/en/gtm.js"
+  },
+  {
+    "url": "https://www.kafd.sa/layouts/system/VisitorIdentification.js"
+  },
+  {
+    "url": "https://www.kafd.sa/wp-content/plugins/country-phone-field-contact-form-7/assets/js/countrySelect.min.js"
+  },
+  {
+    "url": "https://www.kafd.sa/wp-content/plugins/country-phone-field-contact-form-7/assets/js/countrySelect.min.js?ver=5.7.2"
+  },
+  {
+    "url": "https://www.kafd.sa/wp-content/plugins/country-phone-field-contact-form-7/assets/js/intlTelInput.min.js"
+  },
+  {
+    "url": "https://www.kafd.sa/wp-content/plugins/country-phone-field-contact-form-7/assets/js/intlTelInput.min.js?ver=5.7.2"
+  },
+  {
+    "url": "https://www.kafd.sa/wp-content/themes/jquery.magnific-popup.js"
+  },
+  {
+    "url": "https://www.kafd.sa/wp-content/themes/kafd/dist/scripts/main.js"
+  },
+  {
+    "url": "https://www.kafd.sa/wp-includes/js/jquery/jquery-migrate.min.js"
+  },
+  {
+    "url": "https://www.kafd.sa/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2"
+  },
+  {
+    "url": "https://www.kafd.sa/wp-includes/js/jquery/jquery.min.js"
+  },
+  {
+    "url": "https://www.kafd.sa/wp-includes/js/jquery/jquery.min.js?ver=3.5.1"
+  },
+  {
+    "url": "https://www.kafd.sa/wp-includes/js/wp-embed.min.js"
+  },
+  {
+    "url": "https://www.kafd.sa/wp-includes/js/wp-embed.min.js?ver=5.7.2"
+  },
+  {
+    "url": "https://www.kafd.sa/wp-includes/js/wp-emoji-release.min.js?ver=5.7.2"
+  }
+]

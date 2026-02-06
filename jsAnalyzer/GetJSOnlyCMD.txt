@@ -1,0 +1,4 @@
+grep -Ei '\.js([?#].*)?$' urls.txt \
+  | grep -Eiv '\.map([?#]|$)|\.json\.js' \
+  | sort -u \
+  > js.txt
