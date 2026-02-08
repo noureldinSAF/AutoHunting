@@ -287,7 +287,7 @@ func Run(opts *Options) error {
 			Concurrency:   opts.ActiveConcurrency, // CHANGED
 			Timeout:       perTargetTimeout,
 			Wait:          8 * time.Second,
-			ChromePath:    "/usr/bin/google-chrome",
+			//ChromePath:    "/usr/bin/google-chrome",
 			Headless:      true,
 			NoSandbox:     true,
 			DisableGPU:    true,

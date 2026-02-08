@@ -9,6 +9,7 @@ import (
 	"strings"
 	"sync"
 	"time"
+	"runtime"
 
 	"github.com/chromedp/cdproto/network"
 	"github.com/chromedp/chromedp"
@@ -39,8 +40,13 @@ func (o Options) withDefaults() Options {
 		o.Wait = 8 * time.Second
 	}
 	if strings.TrimSpace(o.ChromePath) == "" {
-		o.ChromePath = "/usr/bin/google-chrome"
-	}
+    if runtime.GOOS == "windows" {
+        o.ChromePath = `C:\Program Files\Google\Chrome\Application\chrome.exe`
+    } else {
+        o.ChromePath = "/usr/bin/google-chrome"
+    }
+}
+
 	if !o.Headless {
 		o.Headless = true
 	}
@@ -253,6 +259,7 @@ func etldPlusOne(host string) string {
 	}
 	return etld1
 }
+
 // =========================
 // 1) Informational URL filter (moved from runner/testRunner)
 // =========================
