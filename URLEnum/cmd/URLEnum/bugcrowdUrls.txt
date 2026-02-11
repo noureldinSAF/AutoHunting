@@ -1,0 +1,16 @@
+https://lpg.files.preprod.originenergy.com.au/
+https://reneweclipse.originenergy.com.au/mxclientsystem/mxui/mxui.js
+https://reneweclipse.originenergy.com.au/p/login
+https://reneweclipse.originenergy.com.au/robots.txt
+https://reneweclipse.originenergy.com.au/xas
+https://reneweclipse.originenergy.com.au/widgets/nls/widgets_en-us.js
+https://reneweclipse.originenergy.com.au/index-rtl.html
+https://reneweclipse.originenergy.com.au/widgets/widgets.js
+https://reneweclipse.originenergy.com.au/pages/en_AU/Origin/Login_Web.page.xml
+https://reneweclipse.originenergy.com.au/
+https://reneweclipse.originenergy.com.au/sitemap.xml
+https://reneweclipse.originenergy.com.au/pages/en_AU/Origin/OriginLayout.layout.xml
+https://reneweclipse.originenergy.com.au/metamodel.json
+https://reneweclipse.originenergy.com.au/p/start
+https://reneweclipse.originenergy.com.au/unsupported-browser.html
+https://reneweclipse.originenergy.com.au/widgets/com/mendix/widget/custom/badge/Badge.js

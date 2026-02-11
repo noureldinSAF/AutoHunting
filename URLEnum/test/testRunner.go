@@ -222,7 +222,9 @@ func Run(opts *Options) error {
 	// BUT: workers are distributed across crawl/headless
 	// =========================
 	if opts.ActiveEnabled {
-		logify.Infof("Started Active Enumeration for %d seed URL(s)", len(uniqueURLs))
+		activeSeeds := buildActiveSeedsFromQueries(opts.queries)
+        logify.Infof("Started Active Enumeration for %d seed target(s) (from opts.queries)", len(activeSeeds))
+
 
 		perTargetTimeout := time.Duration(opts.Timeout) * time.Second
 		if perTargetTimeout <= 0 {
@@ -241,7 +243,7 @@ func Run(opts *Options) error {
 
 		// Run crawl concurrently over seeds (bounded)
 		{
-			seeds := append([]string(nil), uniqueURLs...)
+			seeds := append([]string(nil), activeSeeds...)
 			seedJobs := make(chan string, len(seeds))
 			var seedWG sync.WaitGroup
 
@@ -296,7 +298,7 @@ func Run(opts *Options) error {
 
 		// Run headless concurrently over seeds (bounded)
 		{
-			seeds := append([]string(nil), uniqueURLs...)
+			seeds := append([]string(nil), activeSeeds...)
 			seedJobs := make(chan string, len(seeds))
 			var seedWG sync.WaitGroup
 
@@ -415,3 +417,42 @@ func canonicalURL(raw string) string {
     return u.String()
 }
 
+func buildActiveSeedsFromQueries(queries []string) []string {
+	out := make([]string, 0, len(queries))
+	seen := make(map[string]struct{})
+
+	for _, q := range queries {
+		q = strings.TrimSpace(q)
+		if q == "" || strings.HasPrefix(q, "#") {
+			continue
+		}
+
+		// If user provided a full URL, parse it; otherwise treat as host.
+		if !strings.Contains(q, "://") {
+			q = "https://" + q
+		}
+
+		u, err := url.Parse(q)
+		if err != nil {
+			continue
+		}
+
+		host := strings.ToLower(strings.TrimSpace(u.Host))
+		if host == "" {
+			// sometimes the input might be like "example.com/path" without scheme,
+			// after adding scheme it should parse, but just in case:
+			host = strings.ToLower(strings.TrimSpace(u.Path))
+		}
+		if host == "" {
+			continue
+		}
+
+		seed := "https://" + host + "/"
+		if _, ok := seen[seed]; ok {
+			continue
+		}
+		seen[seed] = struct{}{}
+		out = append(out, seed)
+	}
+	return out
+}
