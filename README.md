@@ -1,114 +1,39 @@
-# Here is The AutoHunting tool 
+# Reconnaissance Tool for Bug Bounty Hunters
 
-# How to use asn2cidr tool 
-go to inside the folder and run the following bash cmd 
-```
-./asnmap -asn AS32934    //ASN for facebook 
-```
+Welcome to the Reconnaissance Tool repository – a modular and extensible reconnaissance framework designed for bug bounty hunters and security researchers. It helps automate discovery and mapping of your targets across domains, subdomains, ports, services, and more.
 
-# How to use cidr2ips tool 
-Get the List of cidrs in list.txt and run the following cmd inside the folder
-```
-cat list.txt | go run .
-```
+## 🛠️ Features
 
-# How to use both asn2cidr and cidr2ips together. From ASN to get All the ips 
-go inside cidr2ips and run the following command 
-```
-../asn2cidr/asnmap -asn AS32934 | go run .
-```
-you can use ``` | wc ```  to know the number of lines
+- Multi-threaded enumeration modules: subdomain discovery, port scanning, service fingerprinting, and HTTP probing.
+- API integrations: harness third-party sources such as VirusTotal, Shodan, Censys, etc. for OSINT.
+- Unified output: normalizes results from various enumerators into a consistent JSON format for easy parsing.
+- Modular architecture: easily add your own enumerators or adjust concurrency settings.
+- Extensible configuration: choose which modules to run and configure API keys via a YAML/JSON config file.
 
-# Domain Enumeration ( Enumerate every domains related to a company by its name ) 
-go to this folder:  DomEnum/cmd/DomEnum
+## 🚀 Getting started
 
-```go go run . -h ```
+1. **Clone the repository and build:**
+   ```bash
+   git clone https://github.com/yourusername/AutoHunting.git
+   cd AutoHunting
+   go build -o autohunt .
+   ```
+2. **Configure:**
+   Create a config file (e.g., `config.yaml`) with your target domains, API keys, and module settings. See [`configs/example.yaml`](configs/example.yaml) for a template.
+3. **Run a scan:**
+   ```bash
+   ./autohunt -config config.yaml
+   ```
+   Results will be saved in the `output/` directory.
 
-passive enumeration ```go go run . -q Swisscom -o swisscomDomains.txt```
+## 🤖 Notes
 
-passive and active enumeration ```go go run . -q Swisscom -o swisscomDomains.txt -active```
+This tool is built using patterns described in my [Go Syntax & Notes](../GoLearning/) repository. It demonstrates concurrency with goroutines, HTTP requests, and parsing logic tailored for recon tasks. Feel free to explore the code to learn how these patterns are applied in a real-world reconnaissance tool.
 
-add timeout ( important ) ```go go run . -q Swisscom -o swisscomDomains.txt -active -t 60```
+## 🤝 Contributing
 
-Note : For passive enumeration, we have three sources 
-1- crtsh : free without api
+Contributions are welcome! If you'd like to add new enumeration modules, improve performance, or fix bugs, please open an issue or submit a pull request. Be sure to follow Go best practices (`go fmt`) and include tests where appropriate.
 
-2- whoisfreaks: free with api, it devides the results into pages. every page contains 50 domain. to grep the next page you must sleep for 1 min either you will get rate limit error. 
+## 💄 License
 
-in whoisfreaks.go line 92  
-```go
-if ro.CurrentPage >= 1 {   // replace it with  ro.CurrentPage >= ro.ToTotalPages to get all pages
-```
-there is a subscribtion wihtout rate limit 
-
-3- whoisxmlapi: is not free.
-
-You can add or edit api for all tools in this file https://github.com/noureldinSAF/AutoHunting/tree/main/DomEnum/cmd/DomEnum/internal/config/config.yaml . whoisfreaks and whoisxmlapi will work only if the config file contains api for them
-
-
-
-# DnsEnum 
-Check the existence of targest and you can get all dns records A,AAAA,CNAME, .... 
-go to ./main.go file 
-run 
-```go
-go run ./main.go -h
-```
-usage example
-```go
-go run . -l swisscomDomains.txt -o swisscomDns.txt -of lines -c 20
-```
-
-# SubEnum
-Enumerate subdomains
-go inside this folder SubEnum/cmd/subenum
-```bash
-go run . -h
-```
-usage example
-```bash
-go run . -active -c 10 -i domains.txt -o subs.txt
-```
-mutation is time consuming, so it is important to limit it 
-```bash
-go run . -active -c 20 -i domains.txt -o subs.txt -e -max-mutations-size 50
-```
-To Be Updated -> The tool doesn't brute force in active enumeration 
-
-# vhost - virual host enumeration 
-You will know which subdomains works on which ip
-```bash
-go run . -hosts subs.txt -output vhostedSubs
-```
-# Port Scanner
-```bash
-go run . -host-file subs.txt -host-threads 52 -threads 86 -output-file ports.txt -timeout 3
-```
-
-# URLEnum ( passive and active ) 
-```bash
-go run . -i subs.txt -o urls1.txt -pc 20 -ac 50  -timeout 400 -subs -active 
-```
-Notes : 
-
-commoncrawl doesn't work in codespace, So If you are using the tool in another vps, change RequireAPIKey function to ```func (s *Source) RequireAPIKey() bool { return false }``` in commoncrawl.go file
-
-2- timeout is important becasue of headless
-
-3- The more concurrency the less effeciency
-
-4- passive enumeration may take 2-3 minutes, but active enumeration may take 1 hour. 
-
-5- If the tool finds svg, jpeg, jpg, and other non script files, it will discard it automatically. So the tool is enumerate the important files
-
-6- The tool gives you unique results by default
-
-
-# JSAnalyzer 
-```bash
-go run . -i js.txt -o output.json -timeout 600 -c 10 -only secrets
-```
-
-
-
-
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
