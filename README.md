@@ -1,4 +1,4 @@
-# Reconnaissance Tool for Bug Bounty Hunters
+# Reconnaissance Tools for Bug Bounty Hunters
 
 Welcome to the Reconnaissance Tool repository – a modular and extensible reconnaissance framework designed for bug bounty hunters and security researchers. It helps automate discovery and mapping of your targets across domains, subdomains, ports, services, and more.
 
@@ -116,7 +116,3 @@ go run . -i js.txt -o output.json -timeout 600 -c 10 -only secrets
 ## 🤝 Contributing
 
 Contributions are welcome! If you'd like to add new enumeration modules, improve performance, or fix bugs, please open an issue or submit a pull request. Be sure to follow Go best practices (`go fmt`) and include tests where appropriate.
-
-## 💄 License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
