@@ -1,0 +1,46 @@
+{
+    "template": "http/exposures/configs/phpinfo-files.yaml",
+    "template-url": "https://cloud.projectdiscovery.io/public/phpinfo-files",
+    "template-id": "phpinfo-files",
+    "template-path": "/home/zomasec/nuclei-templates/http/exposures/configs/phpinfo-files.yaml",
+    "info": {
+        "name": "PHPinfo Page - Detect",
+        "author": [
+            "pdteam",
+            "daffainfo",
+            "meme-lord",
+            "dhiyaneshdk",
+            "wabafet",
+            "mastercho"
+        ],
+        "tags": [
+            "config", "exposure", "phpinfo", "vuln"
+        ],
+        "description": "PHPinfo page was detected. The output of the phpinfo() command can reveal sensitive and detailed PHP environment information.\n",
+        "severity": "low",
+        "metadata": {
+            "max-request": 25
+        },
+        "classification": {
+            "cve-id": null,
+            "cwe-id": ["cwe-200"]
+        },
+        "remediation": "Remove PHP Info pages from publicly accessible sites, or restrict access to authorized users only."
+    },
+    "type": "http",
+    "host": "194-204-44-234.ip.elisa.ee",
+    "port": "80",
+    "scheme": "http",
+    "url": "http://194-204-44-234.ip.elisa.ee/",
+    "path": "/",
+    "matched-at": "http://194-204-44-234.ip.elisa.ee//info.php",
+    "extracted-results": ["5.4.45"],
+    "request": "GET //info.php HTTP/1.1\r\nHost: 194-204-44-234.ip.elisa.ee\r\nUser-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 14) AppleWebKit/620.32 (KHTML, like Gecko) Version/17.1.10 Safari/620.32\r\nAccept: */*\r\nAccept-Language: en\r\nAccept-Encoding: gzip\r\n\r\n",
+    "meta": {
+        "paths": "/info.php"
+    },
+    "ip": "194.204.44.234",
+    "timestamp": "2026-02-27T04:09:39.145773632+02:00",
+    "curl-command": "curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 14) AppleWebKit/620.32 (KHTML, like Gecko) Version/17.1.10 Safari/620.32' 'http://194-204-44-234.ip.elisa.ee//info.php'",
+    "matcher-status": true
+}
