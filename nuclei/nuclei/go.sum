@@ -1,0 +1,4 @@
+github.com/cyinnove/logify v1.0.4 h1:rEyGioKkIK6P8ViFnHxDFkNcRzwKDU7eHY8pLAUy/Mo=
+github.com/cyinnove/logify v1.0.4/go.mod h1:GMwsVBd6CP2BHWagttCnVhjT5v5aXj9dCb7EsiWXRts=
+github.com/google/uuid v1.6.0 h1:NIvaJDMOsjHA8n1jAhLSgzrAzy1Hgr+hNrb57e+94F0=
+github.com/google/uuid v1.6.0/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=

@@ -2,3 +2,12 @@ grep -Ei '\.js([?#].*)?$' urls.txt \
   | grep -Eiv '\.map([?#]|$)|\.json\.js' \
   | sort -u \
   > js.txt
+
+
+in Powreshell: 
+
+Select-String -Path urls-SA.txt -Pattern '\.js([?#].*)?$' |
+Select-String -NotMatch '\.map([?#]|$)|\.json\.js' |
+ForEach-Object { $_.Line } |
+Sort-Object -Unique |
+Set-Content js-SA.txt
