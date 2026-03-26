@@ -1,4 +1,4 @@
-# Reconnaissance Tools for Bug Bounty Hunters
+# Automation Tools for Bug Bounty Hunters
 
 Welcome to the Reconnaissance Tool repository – a modular and extensible reconnaissance framework designed for bug bounty hunters and security researchers. It helps automate discovery and mapping of your targets across domains, subdomains, ports, services, and more.
 
