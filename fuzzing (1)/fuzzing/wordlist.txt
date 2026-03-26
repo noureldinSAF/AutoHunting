@@ -1,9 +1,0 @@
-/admin
-/login
-/api
-/backup
-/robots.txt
-/.git/config
-/static
-/health
-/secured/phpinfo.php

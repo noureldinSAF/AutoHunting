@@ -1,6 +1,0 @@
-transformers
-torch
-fastapi
-uvicorn
-pyyaml
-pydantic
