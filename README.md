@@ -161,7 +161,7 @@ cd AutoHunting
 
 ## 🤖 Notes
 
-This tool is built using patterns described in my [Go Syntax & Notes](../GoLearning/) repository. It demonstrates concurrency with goroutines, HTTP requests, and parsing logic tailored for recon tasks. Feel free to explore the code to learn how these patterns are applied in a real-world reconnaissance tool.
+This tool is built using patterns described in my [Go Syntax & Notes](https://github.com/noureldinSAF/GoLearning) repository. It demonstrates concurrency with goroutines, HTTP requests, and parsing logic tailored for recon tasks. Feel free to explore the code to learn how these patterns are applied in a real-world reconnaissance tool.
 
 ## 📘 Module Usage Details
 
