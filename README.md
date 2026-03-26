@@ -1,30 +1,163 @@
-# Automation Tools for Bug Bounty Hunters
+# 🚀 AutoHunting
 
-Welcome to the Reconnaissance Tool repository – a modular and extensible reconnaissance framework designed for bug bounty hunters and security researchers. It helps automate discovery and mapping of your targets across domains, subdomains, ports, services, and more.
+**AutoHunting** is a collection of automation tools designed to streamline and enhance the bug bounty hunting workflow.  
+This repository brings together multiple recon, scanning, and analysis utilities to help identify vulnerabilities efficiently.
 
-## 🛠️ Features
+---
 
-- Multi-threaded enumeration modules: subdomain discovery, port scanning, service fingerprinting, and HTTP probing.
-- API integrations: harness third-party sources such as VirusTotal, Shodan, Censys, etc. for OSINT.
-- Unified output: normalizes results from various enumerators into a consistent JSON format for easy parsing.
-- Modular architecture: easily add your own enumerators or adjust concurrency settings.
-- Extensible configuration: choose which modules to run and configure API keys via a YAML/JSON config file.
+## 🎯 Purpose
 
-## 🚀 Getting started
+The goal of this project is to:
+- Automate repetitive bug bounty tasks
+- Improve recon efficiency
+- Reduce manual effort
+- Provide a modular toolkit for security researchers
 
-1. **Clone the repository and build:**
-   ```bash
-   git clone https://github.com/yourusername/AutoHunting.git
-   cd AutoHunting
-   go build -o autohunt .
-   ```
-2. **Configure:**
-   Create a config file (e.g., `config.yaml`) with your target domains, API keys, and module settings. See [`configs/example.yaml`](configs/example.yaml) for a template.
-3. **Run a scan:**
-   ```bash
-   ./autohunt -config config.yaml
-   ```
-   Results will be saved in the `output/` directory.
+---
+
+## 🧰 Tools Overview
+
+Below is a description of each tool included in this repository:
+
+---
+
+### 🔍 ALValidator
+Validates discovered assets and filters out non-relevant or inactive targets to improve the quality of recon results.
+
+---
+
+### 🐳 DockerScanner
+Scans Docker images and containers for:
+- Secrets (API keys, tokens)
+- Misconfigurations
+- Sensitive files  
+Useful for supply chain and DevOps security testing.
+
+---
+
+### 🌐 DomEnum
+Performs domain enumeration to discover:
+- Subdomains
+- Related domains  
+Helps expand the attack surface during reconnaissance.
+
+---
+
+### 🔗 URLenum
+Extracts and enumerates URLs from various sources to identify:
+- Hidden endpoints
+- API routes
+- Interesting parameters
+
+---
+
+### 🧠 SubEnum
+Subdomain enumeration tool designed to:
+- Discover subdomains from multiple sources
+- Aggregate and clean results
+
+---
+
+### 📡 asn2cidr
+Converts ASN (Autonomous System Number) into CIDR ranges.  
+Useful for identifying IP ranges owned by a target organization.
+
+---
+
+### 🌍 cidr2ips
+Expands CIDR ranges into individual IP addresses for scanning and analysis.
+
+---
+
+### 🧪 dnsenum
+Performs DNS enumeration to gather:
+- Records (A, MX, TXT, etc.)
+- Subdomains
+- DNS misconfigurations
+
+---
+
+### 🧵 fuzzing
+Automates fuzzing of:
+- Endpoints
+- Parameters
+- Inputs  
+Helps discover hidden functionality and vulnerabilities.
+
+---
+
+### 🧠 jsAnalyzer
+Analyzes JavaScript files to extract:
+- Endpoints
+- Secrets
+- Hidden functionality
+
+---
+
+### 🔐 jwt
+Handles JWT (JSON Web Token) analysis:
+- Decoding tokens
+- Checking weaknesses
+- Testing for common misconfigurations
+
+---
+
+### 📦 npm
+Scans npm packages for:
+- Exposed secrets
+- Malicious patterns
+- Supply chain risks
+
+---
+
+### ⚡ nuclei
+Integration or wrapper for **Nuclei** to automate vulnerability scanning using templates.
+
+---
+
+### 🔎 portScanner
+Performs port scanning to identify:
+- Open ports
+- Running services  
+Useful for network-level recon.
+
+---
+
+### 🧬 regex
+Custom regex-based engine used to:
+- Detect secrets
+- Extract patterns from files and responses
+
+---
+
+### ☁️ s3
+Scans for exposed AWS S3 buckets and misconfigurations:
+- Public access
+- Sensitive file exposure
+
+---
+
+### 🌍 vhosts
+Discovers virtual hosts associated with a target:
+- Hidden domains
+- Internal services
+
+---
+
+### 🧾 whois
+Performs WHOIS lookups to gather:
+- Ownership details
+- Registration data
+- Related infrastructure
+
+---
+
+## ⚙️ Installation
+
+```bash
+git clone https://github.com/noureldinSAF/AutoHunting.git
+cd AutoHunting
+```
 
 ## 🤖 Notes
 
@@ -116,3 +249,8 @@ go run . -i js.txt -o output.json -timeout 600 -c 10 -only secrets
 ## 🤝 Contributing
 
 Contributions are welcome! If you'd like to add new enumeration modules, improve performance, or fix bugs, please open an issue or submit a pull request. Be sure to follow Go best practices (`go fmt`) and include tests where appropriate.
+
+## Disclaimer
+
+This project is intended for educational and authorized security testing only.
+Do not use these tools against systems without proper permission.
