@@ -21,8 +21,8 @@ Below is a description of each tool included in this repository:
 
 ---
 
-### 🔍 ALValidator
-Validates discovered assets and filters out non-relevant or inactive targets to improve the quality of recon results.
+### 🔍 AI_Validator
+Validates discovered info and filters out non-relevant or inactive targets to improve the quality of recon results using AI.
 
 ---
 
